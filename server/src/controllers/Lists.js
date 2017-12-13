@@ -51,6 +51,10 @@ const lists = [
 	}
 ];
 
+// const path = require('path');
+// const appPath = path.parse(process.mainModule.filename).dir;
+// const Datastore = require('nedb');
+// const db = new Datastore({ filename: path.join(appPath, 'lists.db'), autoload: true });
 
 module.exports.Lists = class {
 	static list(req, res) {
@@ -61,12 +65,25 @@ module.exports.Lists = class {
 		let id = +req.params.id;
 		let list = lists.find(x => x._id === id);
 		res.send({ list: list });
-	}
+	}	
 
 	static post(req, res) {
 		let list = req.body;
 		list._id = lists.length + 1;
 		lists.push(list);
 		res.send({ list: list });
+	}
+
+	static delete(req, res) {
+		console.log('delete');
+		let id = req.params.id;
+		let index = lists.find(x => x._id === id);
+		lists.splice(index, 1);
+		res.send({ removed: 1 });
+		// db.remove({ _id: id }, (err, numRemoved) => {
+		// 	if(err) res.send({ err: err });
+
+		// 	res.send({ removed: numRemoved });
+		// });
 	}
 };

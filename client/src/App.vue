@@ -24,13 +24,11 @@
 		<v-toolbar-side-icon @click.stop="drawerClick()"></v-toolbar-side-icon>
     	<v-toolbar-title class="white--text">Grocery List</v-toolbar-title>
 	</v-toolbar>
-	<main>
-		<v-content>
+	<v-content>
 			<v-container>
 				<router-view></router-view>
 			</v-container>
 		</v-content>
-	</main>
 	<v-footer app fixed>
 		<span right>2017</span>
 	</v-footer>

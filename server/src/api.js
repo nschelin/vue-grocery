@@ -16,6 +16,7 @@ router.delete('/products/:id', Products.delete);
 router.get('/lists', Lists.list);
 router.get('/lists/:id', Lists.get);
 router.post('/list', Lists.post);
+router.delete('/lists/:id', Lists.delete);
 
 
 module.exports = router;
