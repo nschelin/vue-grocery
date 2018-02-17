@@ -1,15 +1,16 @@
 <template>
-  <v-form ref="form">
+  <v-form v-model="valid" ref="form">
 	  <v-text-field
 	  	label="Product Name"
 		v-model="product.name"
 		required
+		autofocus
 		:rules="nameRules"
 	  >
 	  </v-text-field>
 	  <v-text-field
 	  	label="Price"
-		v-model.number="product.price"
+		v-model="product.price"
 		:rules="priceRules"
 		required
 		prefix="$"
@@ -24,8 +25,8 @@
 		:rules="unitRules"
 		required
 	  ></v-select>
-	  <v-btn @click="submit">Submit</v-btn>
-	  <v-btn @click="cancel" >Cancel</v-btn>
+	  <v-btn @click="submit" :disabled="!valid" color="indigo">Submit</v-btn>
+	  <v-btn @click="cancel" color="red" >Cancel</v-btn>
   </v-form>
 </template>
 
@@ -35,6 +36,7 @@
 	export default {
 		data() {
 			return {
+				valid: true,
 				product: {
 					_id: '',
 					name: '',
@@ -46,7 +48,8 @@
 				],
 				priceRules: [
 					(v) => !!v || 'Price is required',
-					(v) => !isNaN(v) && v.toString().indexOf('.') != -1 || 'A number is required'
+					(v) => /\d+(\.\d{2})?/.test(v) || 'A valid currency amount is required',//(!isNaN(v) && v.toString().indexOf('.') != -1) || 'A number is required',
+					(v) => +v > -1 || 'Please enter a positive number'
 				],
 				unitRules: [
 					() => this.product.unit.length > 0 || 'Please select a unit'
@@ -60,17 +63,19 @@
 		},
 		methods: {
 			submit() {
-				if(this.product._id) {
+				if(this.product._id && this.$refs.form.validate()) {
 					console.log('in update')
 					ProductService.updateProduct(this.product).then(() => {
 						this.$router.push({ name: 'Products' });
 					});
 				}
 				else {
-					console.log('in new')
-					ProductService.insertProduct(this.product).then(() => {
-						this.$router.push({ name: 'Products' });
-					})
+					if(this.$refs.form.validate()) {
+						console.log('in new')
+						ProductService.insertProduct(this.product).then(() => {
+							this.$router.push({ name: 'Products' });
+						});
+					}
 				}
 			},
 			cancel() {

@@ -1,52 +1,113 @@
 <template>
 	<div>
 		<v-layout row>
-			<v-flex md6>
-				<h4>Grocery List</h4>
+			<v-flex md9>
+				<h4>{{ heading }}</h4>
 			</v-flex>
 			<v-flex md3>
-				<v-btn
-					:to="{ name: 'Home' }"
-					dark
-					color="indigo"> 
-					BACK
-				</v-btn>
+				<v-btn @click="addProduct()" color="green">Add</v-btn>
 			</v-flex>
 		</v-layout>
 		<v-layout row>
 			<v-flex md6>
-				<div class="date-info">Created: {{ list.created | dateFormat('MM/DD/YYYY') }}</div>
+				<div v-if="list && list.created" class="date-info">Created: {{ list.created | dateFormat('MM/DD/YYYY') }}</div>
 			</v-flex>
 		</v-layout>
-		<ul>
-			<li v-for="p in list.products" :key="p._id">
-				{{ p.product.name }}
-			</li>
-		</ul>
+		<v-layout row v-if="list.products && !isEdit">
+			<v-flex md12>
+				<ul>
+					<li v-for="p in list.products" :key="p._id">
+						{{ p.product.name }}
+					</li>
+				</ul>
+			</v-flex>
+		</v-layout>
+		<template v-if="isEdit && list.products && list.products.length > 0">
+			<v-layout row>
+				<v-flex md3>
+					<!-- item -->
+				</v-flex>
+			</v-layout>
+		</template>
+		<v-layout row>
+			<v-flex 
+				style="position: absolute; bottom: 50px;"
+				xs8 sm6 md3 
+				offset-xs4 offset-sm6 offset-md9
+				>
+				<v-btn
+					v-if="isEdit"
+					right
+					dark
+					color="indigo">
+					Save
+				</v-btn>
+				<v-btn
+					right
+					:to="{ name: 'Home' }"
+					dark
+					color="red"> 
+					Cancel
+				</v-btn>
+			</v-flex>
+		</v-layout>
+		
 	</div>
 </template>
 
 <script>
 	import ListService from '@/services/ListService';
+	import ProductsService from '@/services/ProductsService';
+	import moment from 'moment';
+
 	export default {
 		data() {
 			return {
+				isEdit: false,
+				heading: '',
 				list: {
 					_id: '',
 					products: [],
 					modified: '',
 					created: ''
+				},
+				availableProducts: []
+			}
+		},
+		methods: {
+			addProduct() {
+				const now = moment().format();
+				let item = {
+					_id: '',
+					name: '',
+					price: '',
+					unit: ''
+				};
+				this.list.products.push(item);
+				
+				if(!this.list.created) {
+					this.list.created = now;
+					this.list.modified = now;
 				}
 			}
 		},
 		mounted() {
 			let id = this.$route.params.id;
 			if(id) {
+				this.heading = 'Edit Grocery List';
 				ListService.getList(id).then((response) => {
 					this.list = response.data.list; 
 					
 				})
 			}
+			else { 
+				this.isEdit = true;
+				this.heading = 'Add Grocery List';
+			}
+			// Get available products
+			ProductsService.getProducts().then((response) => {
+				this.availableProducts = response.data.items;
+			})
 		}
 	}
 </script>

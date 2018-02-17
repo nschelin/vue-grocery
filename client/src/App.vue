@@ -22,7 +22,9 @@
 	</v-navigation-drawer>
   	<v-toolbar app fixed clipped-left>
 		<v-toolbar-side-icon @click.stop="drawerClick()"></v-toolbar-side-icon>
-    	<v-toolbar-title class="white--text">Grocery List</v-toolbar-title>
+    	<v-toolbar-title class="white--text home" @click="goHome()">
+			Grocery List
+		</v-toolbar-title>
 	</v-toolbar>
 	<v-content>
 			<v-container>
@@ -44,11 +46,14 @@ export default {
 		}
 	},
 	methods: {
+		goHome() {
+			this.$router.push({ name: 'Home' });
+		},
 		drawerClick () {		
 			this.drawer = !this.drawer;
 			//return this.drawer;
 		},
-		navigate(routeName) {
+		navigate(routeName) {		
 			this.$router.push({ name: routeName });
 			this.drawer = !this.drawer;
 		}
@@ -62,6 +67,16 @@ export default {
 </script>
 
 <style>
+	.home {
+		cursor: pointer;
+	}
+	.home:hover {
+		text-decoration: underline;
+	}
+
+	.datatable__actions__select {
+		display: none !important;
+	}
 /*#app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -5,6 +5,7 @@ import Vuetify from 'vuetify';
 import App from './App'
 import router from './router'
 import './filters/DateFormatFilter';
+import './filters/CurrencyFormatFilter';
 
 Vue.use(Vuetify);
 Vue.config.productionTip = false

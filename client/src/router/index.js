@@ -16,6 +16,11 @@ export default new Router({
 			component: Lists
 		},
 		{
+			path: '/lists/add',
+			name: 'ListAdd',
+			component: ListDetails
+		},
+		{
 			path: '/lists/:id',
 			name: 'ListEdit',
 			component: ListDetails
