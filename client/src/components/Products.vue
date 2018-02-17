@@ -1,17 +1,28 @@
 <template>
 	<div>
-		<v-layout row>
+		<!-- <v-layout row>
 			<v-flex md6>
 				<h4>Products</h4>
 			</v-flex>
-		</v-layout>
+		</v-layout> -->
 		
+		<v-card-title>
+      		<h4 style="padding: 0; margin: 18px 0 0;">Products</h4>
+		<v-spacer></v-spacer>
+		<v-text-field
+			append-icon="search"
+			label="Search"
+			single-line
+			hide-details
+			v-model="search"
+		></v-text-field>
+		</v-card-title>
 		<v-data-table
 			:items="sortedProducts"
 			item-key="_id"
 			:rows-per-page-items="[10]"
+			:search="search"
 			>
-
 			<template slot="headers" slot-scope="props">
 				<tr>
 					<th>Name</th>
@@ -25,7 +36,7 @@
 					<td>{{ props.item.name }}</td>
 					<td>{{ props.item.price | currency }}</td>
 					<td>{{ props.item.unit }}</td>
-					<td style="text-center">
+					<td style="text-align: center;">
 						<v-btn 	color="indigo" 
 								:to="{ 	name: 'ProductsEdit', 
 										params: { id: props.item._id } }">
@@ -86,6 +97,7 @@ import ProductService from '@/services/ProductsService'
 export default {
 	data() {
 		return {
+			search: '',
 			dialog: false,
 			removeProduct: {},
 			snackbar: {
