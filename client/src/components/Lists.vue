@@ -28,7 +28,7 @@
 			<template slot="items" slot-scope="props">
 				<tr>
 					<td>
-						{{ props.item.created | dateFormat('MM/DD/YYYY') }}
+						{{ props.item.created | date }}
 					</td>
 					<td style="text-align: center;">	
 						<v-btn color="red" small @click="validateRemove(props.item)">Delete</v-btn>

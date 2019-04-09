@@ -10,7 +10,7 @@
 		</v-layout>
 		<v-layout row>
 			<v-flex md6>
-				<div v-if="list && list.created" class="date-info">Created: {{ list.created | dateFormat('MM/DD/YYYY') }}</div>
+				<div v-if="list && list.created" class="date-info">Created: {{ list.created | date }}</div>
 			</v-flex>
 		</v-layout>
 		<v-layout row v-if="list.products && !isEdit">
