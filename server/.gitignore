@@ -15,5 +15,12 @@ selenium-debug.log
 *.njsproj
 *.sln
 
+# env files
+.env
+.env.local
+.env.*.local
+
 # nedb files
+
 *.db
+server/*.db
