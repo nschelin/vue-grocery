@@ -41,6 +41,22 @@ class ProductRepo {
 	async insert(product) {
 		return await productsDb.insertAsync(product);
 	}
+
+	async update(id, product) {
+		return await productsDb.updateAsync({ _id: id }, product);
+	}
+
+	async delete(id) {
+		return await productsDb.removeAsync({ _id: id });
+	}
+
+	async findById(id) {
+		return await productsDb.findOneAsync({ _id: id });
+	}
+
+	async findByName(name) {
+		return await productsDb.findOneAsync({ name });
+	}
 }
 
 module.exports = { ProductRepo };

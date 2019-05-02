@@ -22,11 +22,50 @@
 const { ProductRepo } = require('../../db');
 const db = new ProductRepo();
 
+exports.list = async (req, res) => {
+	const page = req.query.page || 1;
+	const pageSize = req.query.pageSize || 5;
+	const clients = await db.list(+page, +pageSize);
+	res.send(clients);
+};
+
 exports.add = async (req, res) => {
 	const product = req.body;
-	product.created = product.modified = new Date();
-	const newProduct = await db.insert(product);
-	res.send(newProduct);
+	const foundProduct = await db.findByName(product.name);
+	if (!foundProduct) {
+		product.created = product.modified = new Date();
+		const newProduct = await db.insert(product);
+		res.send(newProduct);
+	} else {
+		res.status(400).send('Product Exists');
+	}
+};
+
+exports.update = async (req, res) => {
+	const id = req.params.id;
+	const product = req.body;
+	const date = new Date();
+	// if for some reason there isn't a created property, add it.
+	if (!product.created) product.created = date;
+	product.modified = date;
+	try {
+		const updatedProduct = await db.update(id, product);
+		res.send(updatedProduct);
+	} catch (e) {
+		res.status(500).send(e);
+	}
+};
+
+exports.delete = async (req, res) => {
+	const id = req.params.id;
+
+	try {
+		const numRemoved = await db.delete(id);
+		console.log(numRemoved);
+		res.send({ numRemoved });
+	} catch (e) {
+		res.status(500).send(e);
+	}
 };
 
 // const path = require('path');

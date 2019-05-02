@@ -9,7 +9,10 @@ router.get('/', (req, res) => {
 	res.send({ message: 'hello from api!' });
 });
 
+router.get('/products', productsController.list);
 router.post('/product', productsController.add);
+router.put('/product/:id', productsController.update);
+router.delete('/product/:id', productsController.delete);
 
 // router.get('/products', Products.list);
 // router.get('/products/:id', Products.get);
