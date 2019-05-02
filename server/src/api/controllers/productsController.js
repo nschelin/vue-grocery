@@ -29,6 +29,13 @@ exports.list = async (req, res) => {
 	res.send(clients);
 };
 
+exports.get = async (req, res) => {
+	const id = req.params.id;
+	const foundProduct = await db.findById(id);
+	if (foundProduct) res.send(foundProduct);
+	else res.status(404).send();
+};
+
 exports.add = async (req, res) => {
 	const product = req.body;
 	const foundProduct = await db.findByName(product.name);

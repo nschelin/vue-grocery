@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/products', productsController.list);
+router.get('/product/:id', productsController.get);
 router.post('/product', productsController.add);
 router.put('/product/:id', productsController.update);
 router.delete('/product/:id', productsController.delete);
