@@ -31,7 +31,7 @@
 </template>
 
 <script>
-	import ProductService from '@/services/ProductsService'
+	import productService from '@/services/productsService'
 
 	export default {
 		data() {

@@ -1,19 +1,19 @@
-import Api from '@/services/Api';
+import api from '@/services/api';
 
 export default {
 	getProducts() {
-		return Api().get('products');
+		return api().get('products');
 	},
 	getProduct(id) {
-		return Api().get(`products/${id}`);
+		return api().get(`products/${id}`);
 	},
 	insertProduct(product) {
-		return Api().post('product', product);
+		return api().post('product', product);
 	},
 	updateProduct(product) {
-		return Api().put(`products/${product._id}`, product);
+		return api().put(`products/${product._id}`, product);
 	},
 	deleteProduct(product) {
-		return Api().delete(`products/${product._id}`);
+		return api().delete(`products/${product._id}`);
 	}
 };

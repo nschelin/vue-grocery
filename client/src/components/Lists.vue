@@ -83,7 +83,7 @@
 </template>
 
 <script>
-	import ListService from '@/services/ListService';
+	import listService from '@/services/listService';
 	export default {
 		data() {
 			return {
@@ -112,7 +112,7 @@
 				this.removeList = list;
 			},
 			remove() {
-				ListService.deleteList(this.removeList).then((response) => {
+				listService.deleteList(this.removeList).then((response) => {
 					if(response.data.removed === 1) {
 						let index = this.lists.findIndex((ll) => ll._id === this.removeList._id);
 						this.lists.splice(index, 1);
@@ -125,7 +125,7 @@
 			}
 		},
 		mounted() {
-			ListService.getLists().then((response) => {
+			listService.getLists().then((response) => {
 				this.lists = response.data.lists;
 				console.log(this.lists);
 			});

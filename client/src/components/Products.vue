@@ -93,7 +93,7 @@
 
 <script>
 
-import ProductService from '@/services/ProductsService'
+import productsService from '@/services/productsService'
 export default {
 	data() {
 		return {
@@ -111,10 +111,13 @@ export default {
 	},
 	computed: {
 		sortedProducts: function() {
-			return this.products.sort((a,b) => {
-				return a.name > b.name ? 1 : -1;
-			});
-
+			if(this.products && this.products.length) {
+				return this.products.sort((a,b) => {
+					return a.name > b.name ? 1 : -1;
+				});
+			}
+			else
+				return [];
 		}
 	},
 	methods: {
@@ -123,27 +126,24 @@ export default {
 			this.removeProduct = product;
 		},
 
-		remove() {
-			ProductService.deleteProduct(this.removeProduct).then((response) => {
-				if(response.data.removed === 1) {	
-					let index = this.products.findIndex((prod) => prod._id === this.removeProduct._id);
-					this.products.splice(index, 1);
-					this.removeProduct = {};
-					this.dialog = false;
-					this.removeList = {};
-					this.snackbar.show = true;
-					this.snackbar.color = 'success';
-				}
-			})
+		async remove() {
+			const response = productsService.deleteProduct(this.removeProduct);
+			if(response.data.removed === 1) {	
+				let index = this.products.findIndex((prod) => prod._id === this.removeProduct._id);
+				this.products.splice(index, 1);
+				this.removeProduct = {};
+				this.dialog = false;
+				this.removeList = {};
+				this.snackbar.show = true;
+				this.snackbar.color = 'success';
+			}
+			
 		}
 	},
-	mounted() {
-		ProductService.getProducts().then((response) => {
-			this.products = response.data.items; 
-		})
-		// .catch((err) => {
-		// 	console.log('error')
-		// })
+	async mounted() {
+		const response = await productsService.getProducts();
+		console.log(response);
+		this.products = response.data.products; 
 	}
 }
 

@@ -56,8 +56,8 @@
 </template>
 
 <script>
-	import ListService from '@/services/ListService';
-	import ProductsService from '@/services/ProductsService';
+	import listService from '@/services/listService';
+	import productsService from '@/services/productsService';
 	import moment from 'moment';
 
 	export default {
@@ -95,7 +95,7 @@
 			let id = this.$route.params.id;
 			if(id) {
 				this.heading = 'Edit Grocery List';
-				ListService.getList(id).then((response) => {
+				listService.getList(id).then((response) => {
 					this.list = response.data.list; 
 					
 				})
@@ -105,7 +105,7 @@
 				this.heading = 'Add Grocery List';
 			}
 			// Get available products
-			ProductsService.getProducts().then((response) => {
+			productsService.getProducts().then((response) => {
 				this.availableProducts = response.data.items;
 			})
 		}
