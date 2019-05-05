@@ -1,12 +1,15 @@
 <template>
-	<div>
+	<div class="container">
+		<div class="column">
+			<b-table :data="products" :columns="columns"></b-table>
+		</div>
 		<!-- <v-layout row>
 			<v-flex md6>
 				<h4>Products</h4>
 			</v-flex>
 		</v-layout> -->
 		
-		<v-card-title>
+		<!-- <v-card-title>
       		<h4 style="padding: 0; margin: 18px 0 0;">Products</h4>
 		<v-spacer></v-spacer>
 		<v-text-field
@@ -87,7 +90,7 @@
 				>
 					<v-icon dark>add</v-icon>
 			</v-btn>
-		</v-fab-transition>
+		</v-fab-transition> -->
 	</div>
 </template>
 
@@ -97,22 +100,26 @@ import productsService from '@/services/productsService'
 export default {
 	data() {
 		return {
-			search: '',
-			dialog: false,
+			// search: '',
+			// dialog: false,
 			removeProduct: {},
-			snackbar: {
-				show: false,
-				color: '',
-				timeout: 6000,
-				text: 'Product Deleted',
-			},
-			products: []
+			// snackbar: {
+			// 	show: false,
+			// 	color: '',
+			// 	timeout: 6000,
+			// 	text: 'Product Deleted',
+			// },
+			products: [],
+			columns: [ {
+				field: 'name',
+				label: 'Name'
+			}]
 		}
 	},
 	computed: {
 		sortedProducts: function() {
 			if(this.products && this.products.length) {
-				return this.products.sort((a,b) => {
+				return this.products.slice().sort((a,b) => {
 					return a.name > b.name ? 1 : -1;
 				});
 			}
@@ -122,7 +129,7 @@ export default {
 	},
 	methods: {
 		validateRemove(product) {
-			this.dialog = true;
+			// this.dialog = true;
 			this.removeProduct = product;
 		},
 
@@ -134,15 +141,15 @@ export default {
 				this.removeProduct = {};
 				this.dialog = false;
 				this.removeList = {};
-				this.snackbar.show = true;
-				this.snackbar.color = 'success';
+				// this.snackbar.show = true;
+				// this.snackbar.color = 'success';
 			}
 			
 		}
 	},
 	async mounted() {
 		const response = await productsService.getProducts();
-		console.log(response);
+		console.log(response.data.products);
 		this.products = response.data.products; 
 	}
 }

@@ -1,5 +1,10 @@
 <template>
-  <v-app dark>
+	<div class="container">
+		<div class="column">
+			<router-view></router-view>
+		</div>
+	</div>
+  <!-- <v-app dark>
   	<v-navigation-drawer 
 	  v-model="drawer"
 	  clipped
@@ -34,7 +39,7 @@
 	<v-footer app fixed>
 		<span right>2017</span>
 	</v-footer>
-</v-app>
+</v-app> -->
 </template>
 
 <script>

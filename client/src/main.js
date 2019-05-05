@@ -1,12 +1,15 @@
 import Vue from 'vue';
-import Vuetify from 'vuetify';
+import Buefy from 'buefy';
+//import Vuetify from 'vuetify';
 import App from './App';
 import router from './router';
 import store from './store';
 import filters from './filters';
-import 'vuetify/dist/vuetify.min.css';
+//import 'vuetify/dist/vuetify.min.css';
+import 'buefy/dist/buefy.min.css';
 
-Vue.use(Vuetify);
+//Vue.use(Vuetify);
+Vue.use(Buefy);
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
