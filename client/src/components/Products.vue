@@ -1,6 +1,13 @@
 <template>
 	<div class="container">
 		<div class="column">
+			<div class="columns is-mobile">
+				<div class="column is-5 is-offset-7">
+					<b-button type="is-primary" class="is-pulled-right">Add Product</b-button>
+				</div>
+			</div>
+		</div>
+		<div class="column">
 			<b-table :data="products" 
 					 :paginated="true"
 					 :per-page="10"
@@ -28,23 +35,8 @@ import productsService from '@/services/productsService';
 export default {
 	data() {
 		return {
-			// search: '',
-			// dialog: false,
 			removeProduct: {},
-			// snackbar: {
-			// 	show: false,
-			// 	color: '',
-			// 	timeout: 6000,
-			// 	text: 'Product Deleted',
-			// },
 			products: [],
-			columns: [ {
-				field: 'name',
-				label: 'Name'
-			},{
-				field: 'created',
-				label: ''
-			}]
 		}
 	},
 	computed: {
@@ -60,7 +52,6 @@ export default {
 	},
 	methods: {
 		validateRemove(product) {
-			// this.dialog = true;
 			this.removeProduct = product;
 		},
 
@@ -70,10 +61,7 @@ export default {
 				let index = this.products.findIndex((prod) => prod._id === this.removeProduct._id);
 				this.products.splice(index, 1);
 				this.removeProduct = {};
-				this.dialog = false;
 				this.removeList = {};
-				// this.snackbar.show = true;
-				// this.snackbar.color = 'success';
 			}
 			
 		}

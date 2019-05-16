@@ -2,7 +2,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <router-link class="navbar-item is-size-1-mobile is-size-2-tablet has-text-weight-semibold" to="/" active-class="" exact>
-      Home
+      Grocery List
     </router-link>
 
     <div role="button" @click="show = !show" class="navbar-burger burger" :class="{ 'is-active': show }" aria-label="menu" aria-expanded="false">
@@ -22,17 +22,18 @@
       <router-link class="navbar-item" to="products">
         Products
       </router-link>
+
       <router-link class="navbar-item" to="dinners">
         Dinners
       </router-link>
 
-      <div class="navbar-item">
+      <!-- <div class="navbar-item">
         <div class="buttons">
           <a class="button is-light">
             Log in
           </a>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </nav>
