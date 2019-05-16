@@ -29,9 +29,19 @@ export default new Router({
 		// 	component: ListDetails
 		// },
 		{
+			path: '/lists',
+			name: 'Lists',
+			component: () => import('../views/Lists.vue')
+		},
+		{
 			path: '/products',
 			name: 'Products',
 			component: () => import('../views/Products.vue')
+		},
+		{
+			path: '/dinners',
+			name: 'Dinners',
+			component: () => import('../views/Dinners.vue')
 		}
 		// {
 		// 	path: '/products/add',

@@ -1,17 +1,17 @@
 <template>
     <div class="container">
-        <Products />
+       Home!
     </div>
 </template>
 
 <script>
     //import Lists from '../components/Lists.vue';
-    import Products from '../components/Products.vue';
+    // import Products from '../components/Products.vue';
     export default {
-        name: 'home',
+        name: '',
         components: {
             // Lists
-            Products
+            // Products
         }        
     }
 </script>
