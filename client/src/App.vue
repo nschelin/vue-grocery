@@ -1,48 +1,14 @@
 <template>
 	<div class="container">
+		<Navigation />
 		<div class="column">
 			<router-view></router-view>
 		</div>
 	</div>
-  <!-- <v-app dark>
-  	<v-navigation-drawer 
-	  v-model="drawer"
-	  clipped
-	  disable-route-watcher
-	  app>
-		<v-list dense>
-			<v-list-tile @click="navigate('Home')">
-				<v-list-tile-content>
-					<v-list-tile-title>Home</v-list-tile-title>
-				</v-list-tile-content>
-			</v-list-tile>
-
-			<v-list-tile @click="navigate('Products')">
-				<v-list-tile-content>
-					<v-list-tile-title>Products</v-list-tile-title>
-				</v-list-tile-content>
-			</v-list-tile>
-
-		</v-list>
-	</v-navigation-drawer>
-  	<v-toolbar app fixed clipped-left>
-		<v-toolbar-side-icon @click.stop="drawerClick()"></v-toolbar-side-icon>
-    	<v-toolbar-title class="white--text home" @click="goHome()">
-			Grocery List
-		</v-toolbar-title>
-	</v-toolbar>
-	<v-content>
-			<v-container>
-				<router-view></router-view>
-			</v-container>
-		</v-content>
-	<v-footer app fixed>
-		<span right>2017</span>
-	</v-footer>
-</v-app> -->
 </template>
 
 <script>
+import Navigation from '@/components/Navigation';
 export default {
 	name: 'app',
 	data() {
@@ -64,8 +30,10 @@ export default {
 		}
 	},
 	mounted() {
-		
-			
+	
+	},
+	components: {
+		Navigation
 	}
 
 }
