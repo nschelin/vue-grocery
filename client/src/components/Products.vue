@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div>
 		<div class="column">
 			<div class="columns is-mobile">
 				<div class="column is-5 is-offset-7">

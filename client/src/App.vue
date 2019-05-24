@@ -2,7 +2,9 @@
 	<div class="container">
 		<Navigation />
 		<div class="column">
-			<router-view></router-view>
+			<transition name="slide-left">
+				<router-view></router-view>
+			</transition>
 		</div>
 	</div>
 </template>
@@ -43,12 +45,38 @@ export default {
 	.home {
 		cursor: pointer;
 	}
+
 	.home:hover {
 		text-decoration: underline;
 	}
 
 	.datatable__actions__select {
 		display: none !important;
+	}
+
+	.slide-left-enter {
+		opacity: 0;
+		transform: translate(100%, 0);
+	}
+	
+	.slide-left-leave-to {
+		opacity: 0;
+		transform: translate(-100%, 0);
+	}
+	
+	.slide-left-enter-active, 
+	.slide-left-leave-active {		
+		position: absolute !important;
+		transition: all .8s cubic-bezier(.35,0,.25,1);
+	}
+
+
+	@media (max-width: 768px) {
+		.slide-left-enter-active, 
+		.slide-left-leave-active {		
+			margin: 0 auto;
+			width: 98%;
+		}
 	}
 /*#app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
