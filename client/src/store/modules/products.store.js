@@ -1,3 +1,4 @@
+import { productService } from '../../services';
 const state = {
 	products: []
 };
@@ -20,7 +21,15 @@ const mutations = {
 };
 
 const actions = {
-	async getProducts({ commit }) {}
+	async getProducts({ commit }) {
+		const { data, error } = await productService.getProducts();
+		if (error) {
+			console.error(error);
+			return false;
+		}
+
+		commit('SET_PRODUCTS', data);
+	}
 };
 
 export default {

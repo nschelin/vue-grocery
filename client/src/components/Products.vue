@@ -8,11 +8,12 @@
 			</div>
 		</div>
 		<div class="column">
-			<b-table :data="products" 
-					 :paginated="true"
-					 :per-page="10"
-					 :default-sort-direction="'asc'"
-					 :default-sort="products.name">
+			<b-table v-if="products" 
+					:data="products" 
+					:paginated="true"
+					:per-page="10"
+					:default-sort-direction="'asc'"
+					:default-sort="products.name">
 				<template slot-scope="props">
 					<b-table-column field="name" label="Name">
 						{{ props.row.name }}
@@ -31,15 +32,14 @@
 
 <script>
 
-import productsService from '@/services/productsService';
+import { mapState } from 'vuex';
+
 export default {
-	data() {
-		return {
-			removeProduct: {},
-			products: [],
-		}
-	},
+	data: () => ({}),
 	computed: {
+		...mapState({
+			products: state => state.products.products.products
+		}),
 		sortedProducts: function() {
 			if(this.products && this.products.length) {
 				return this.products.slice().sort((a,b) => {
@@ -51,24 +51,28 @@ export default {
 		}
 	},
 	methods: {
-		validateRemove(product) {
-			this.removeProduct = product;
-		},
+		showDialog() {
 
-		async remove() {
-			const response = productsService.deleteProduct(this.removeProduct);
-			if(response.data.removed === 1) {	
-				let index = this.products.findIndex((prod) => prod._id === this.removeProduct._id);
-				this.products.splice(index, 1);
-				this.removeProduct = {};
-				this.removeList = {};
-			}
-			
 		}
+		// validateRemove(product) {
+		// 	this.removeProduct = product;
+		// },
+
+		// async remove() {
+		// 	const response = productsService.deleteProduct(this.removeProduct);
+		// 	if(response.data.removed === 1) {	
+		// 		let index = this.products.findIndex((prod) => prod._id === this.removeProduct._id);
+		// 		this.products.splice(index, 1);
+		// 		this.removeProduct = {};
+		// 		this.removeList = {};
+		// 	}
+			
+		// }
 	},
-	async mounted() {
-		const response = await productsService.getProducts();
-		this.products = response.data.products; 
+	async created() {
+		await this.$store.dispatch('getProducts');
+		// const response = await productsService.getProducts();
+		// this.products = response.data.products; 
 	}
 }
 
