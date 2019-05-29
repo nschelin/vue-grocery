@@ -3,7 +3,7 @@
 		<div class="column">
 			<div class="columns is-mobile">
 				<div class="column is-5 is-offset-7">
-					<b-button type="is-primary" class="is-pulled-right">Add Product</b-button>
+					<b-button type="is-primary" class="is-pulled-right" @click="dialog = true">Add Product</b-button>
 				</div>
 			</div>
 		</div>
@@ -27,15 +27,31 @@
 				</template>
 			</b-table>
 		</div>
+		<b-modal :active.sync="dialog" 
+				 :can-cancel="false">
+				 <div class="card">
+					 <div class="card-header">
+						 <div class="card-header-title has-background-primary has-text-white">
+						 	Add/Edit Product
+						 </div>
+					 </div>
+					 <div class="card-content">
+						<ProductDetails v-model="dialog" />
+					 </div>
+				 </div>
+		</b-modal>
 	</div>
 </template>
 
 <script>
 
+import ProductDetails from './ProductDetails';
 import { mapState } from 'vuex';
 
 export default {
-	data: () => ({}),
+	data: () => ({
+		dialog: false
+	}),
 	computed: {
 		...mapState({
 			products: state => state.products.products.products
@@ -51,9 +67,6 @@ export default {
 		}
 	},
 	methods: {
-		showDialog() {
-
-		}
 		// validateRemove(product) {
 		// 	this.removeProduct = product;
 		// },
@@ -73,9 +86,20 @@ export default {
 		await this.$store.dispatch('getProducts');
 		// const response = await productsService.getProducts();
 		// this.products = response.data.products; 
+	},
+	components: {
+		ProductDetails
 	}
 }
 
 </script>
 <style scoped>
+	.card {
+		border-radius: 5px;
+	}
+
+	.card-header-title {
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
 </style>
