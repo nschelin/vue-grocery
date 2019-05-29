@@ -57,6 +57,7 @@ exports.update = async (req, res) => {
 	product.modified = date;
 	try {
 		const updatedProduct = await db.update(id, product);
+		console.log('updatedProduct: ', updatedProduct);
 		res.send(updatedProduct);
 	} catch (e) {
 		res.status(500).send(e);
