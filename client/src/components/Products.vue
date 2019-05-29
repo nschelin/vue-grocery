@@ -24,7 +24,7 @@
 						{{ props.row.created | date }}
 					</b-table-column>
 					<b-table-column field="modified" label="Modified">
-						{{ props.row.created | date }}
+						{{ props.row.modified | date }}
 					</b-table-column>
 				</template>
 			</b-table>
