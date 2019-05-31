@@ -4,9 +4,12 @@
 			<b-field label="Product Name">
 				<b-input v-model="product.name"></b-input>
 			</b-field>
-			<b-field label="Product Price">
-				<b-input v-model="product.price" icon="currency-usd"></b-input>
-			</b-field>
+			<div class="field">
+				<label class="label"> Product Price</label>
+				<div class="control">
+					<money v-model="product.price" v-bind="moneyConfig" class="input" icon="currency-usd"></money>
+				</div>
+			</div>
 
 			<div class="columns">
 				<div class="column is-offset-9">
@@ -25,10 +28,18 @@
 </template>
 
 <script>
+	import { Money } from 'v-money'
 	export default {
 		props: ['value', 'active'],
 		data: () => ({
-			product: null
+			product: null,
+			moneyConfig: {
+				decimal: '.',
+				thousands: ',',
+				precision: 2,
+				prefix: '$ ',
+				masked: false
+			}
 		}),
 		methods: {
 			saveProduct() {
@@ -49,6 +60,9 @@
 			if(!this.product.price) {
 				this.product.price = 0;
 			}
+		},
+		components: {
+			Money
 		}
 	}
 </script>
