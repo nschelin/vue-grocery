@@ -31,6 +31,24 @@ export default {
 			this.drawer = !this.drawer;
 		}
 	},
+	created() {
+		window.addEventListener('keyup', (e) => {
+			if(e.altKey && e.code === 'KeyP') {
+				this.$router.push({ name: 'Products' });
+			}
+			if(e.altKey && e.code === 'KeyD') {
+				this.$router.push({ name: 'Dinners' });
+			}
+			if(e.altKey && e.code === 'KeyL') {
+				this.$router.push({ name: 'Lists' });
+			}
+			if(e.altKey && e.code === 'KeyH') {
+				this.$router.push({ name: 'Home' });
+			}
+
+
+		});
+	},
 	mounted() {
 	
 	},
