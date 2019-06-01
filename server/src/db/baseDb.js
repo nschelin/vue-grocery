@@ -1,4 +1,4 @@
-const collections = ['products'];
+const collections = ['products', 'dinners', 'lists'];
 const DataStore = require('nedb');
 
 DataStore.prototype.insertAsync = async function(doc) {

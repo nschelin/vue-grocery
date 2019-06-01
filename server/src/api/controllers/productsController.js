@@ -25,8 +25,8 @@ const db = new ProductRepo();
 exports.list = async (req, res) => {
 	const page = req.query.page || 1;
 	const pageSize = req.query.pageSize || 5;
-	const clients = await db.list(+page, +pageSize);
-	res.send(clients);
+	const productsInfo = await db.list(+page, +pageSize);
+	res.send(productsInfo);
 };
 
 exports.get = async (req, res) => {
