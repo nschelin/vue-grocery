@@ -1,3 +1,4 @@
 import productService from './productsService';
 import listService from './listService';
-export { productService, listService };
+import dinnerService from './dinnersService';
+export { productService, listService, dinnerService };

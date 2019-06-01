@@ -58,7 +58,7 @@ const actions = {
 		commit('UPDATE_PRODUCT', updatedProduct);
 	},
 	async deleteProduct({ commit }, product) {
-		const { data, error } = await productService.deleteProduct(product);
+		const { error } = await productService.deleteProduct(product);
 		if (error) {
 			console.error(error);
 			return false;
