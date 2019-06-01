@@ -2,7 +2,7 @@
 	<div class="column" v-if="product !== null">
 		<form @submit.prevent="saveProduct()">
 			<b-field label="Product Name">
-				<b-input v-model="product.name"></b-input>
+				<b-input v-model="product.name" ref="productName"></b-input>
 			</b-field>
 			<div class="field">
 				<label class="label"> Product Price</label>
@@ -54,6 +54,8 @@
 			}
 		},
 		mounted() {
+			this.$nextTick(() => setTimeout(() => this.$refs.productName.$el.querySelector('input').focus(), 100));
+			
 			this.product = this.value !== undefined ? { ...this.value } : null
 
 			// NOTE: Temporary

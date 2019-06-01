@@ -60,7 +60,7 @@ export default {
 	}),
 	computed: {
 		...mapState({
-			// state.moduleName.productsObject.productsArrayOfActualProducts
+			// NOTE: state.moduleName.productsObject.productsArrayOfActualProducts
 			products: state => state.productsMod.products
 		}),
 		sortedProducts: function() {
