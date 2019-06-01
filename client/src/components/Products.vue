@@ -3,7 +3,7 @@
 		<div class="column">
 			<div class="columns is-mobile">
 				<div class="column is-5 is-offset-7">
-					<b-button type="is-primary" class="is-pulled-right" @click="addProduct()">Add Product</b-button>
+					<b-button type="is-primary" class="is-pulled-right" @click="addProduct()"><span class="altkey">A</span>dd Product</b-button>
 				</div>
 			</div>
 		</div>
@@ -81,6 +81,11 @@ export default {
 		editProduct(product) {
 			this.currentProduct = product;
 			this.dialog = true;
+		},
+		handleAdd(e) {
+			if(e.altKey && e.code === 'KeyA') {
+				this.addProduct();
+			}
 		}
 		// validateRemove(product) {
 		// 	this.removeProduct = product;
@@ -99,6 +104,10 @@ export default {
 	},
 	created() {
 		this.$store.dispatch('getProducts');
+		window.addEventListener('keypress', this.handleAdd);
+	},
+	destroyed() {
+		window.removeEventListener('keypress', this.handleAdd);
 	},
 	components: {
 		ProductDetails

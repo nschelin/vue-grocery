@@ -33,21 +33,32 @@ export default {
 	},
 	created() {
 		window.addEventListener('keyup', (e) => {
+		
 			if(e.altKey && e.code === 'KeyP') {
 				this.$router.push({ name: 'Products' });
 			}
-			if(e.altKey && e.code === 'KeyD') {
+			else if(e.altKey && e.code === 'KeyD') {
 				this.$router.push({ name: 'Dinners' });
 			}
-			if(e.altKey && e.code === 'KeyL') {
+			else if(e.altKey && e.code === 'KeyL') {
 				this.$router.push({ name: 'Lists' });
 			}
-			if(e.altKey && e.code === 'KeyH') {
+			else if(e.altKey && e.code === 'KeyG') {
 				this.$router.push({ name: 'Home' });
 			}
-
-
+			else {
+				const altKeys = Array.from(document.querySelectorAll('.altkey'));
+				altKeys.forEach(altKey => altKey.classList.remove('underline'));
+			}
 		});
+
+		window.addEventListener('keydown', (e) => {
+			if(e.altKey) {
+				const altKeys = Array.from(document.querySelectorAll('.altkey'));
+				altKeys.forEach(altKey => altKey.classList.add('underline'));
+			}
+			
+		})
 	},
 	mounted() {
 	
@@ -88,6 +99,9 @@ export default {
 		transition: all .8s cubic-bezier(.35,0,.25,1);
 	}
 
+	.underline {
+		text-decoration: underline;
+	}
 
 	@media (max-width: 768px) {
 		.slide-left-enter-active, 

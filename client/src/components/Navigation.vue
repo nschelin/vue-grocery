@@ -15,16 +15,16 @@
   <div class="navbar-menu" :class="{ 'is-active': show }">
 
     <div class="navbar-end">
-      <router-link class="navbar-item" link to="lists">
-        Lists
+      <router-link class="navbar-item" to="lists">
+        <span class="altkey">L</span>ists
       </router-link>
 
       <router-link class="navbar-item" to="products">
-        Products
+        <span class="altkey">P</span>roducts
       </router-link>
 
       <router-link class="navbar-item" to="dinners">
-        Dinners
+        <span class="altkey" title="Alt+D">D</span>inners
       </router-link>
 
       <!-- <div class="navbar-item">
