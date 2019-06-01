@@ -2,7 +2,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <router-link class="navbar-item is-size-1-mobile is-size-2-tablet has-text-weight-semibold" to="/" active-class="" exact>
-      Grocery List
+      <span class="altkey">G</span>rocery List
     </router-link>
 
     <div role="button" @click="show = !show" class="navbar-burger burger" :class="{ 'is-active': show }" aria-label="menu" aria-expanded="false">

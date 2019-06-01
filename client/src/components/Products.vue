@@ -26,6 +26,9 @@
 					<b-table-column field="modified" label="Modified">
 						{{ props.row.modified | date }}
 					</b-table-column>
+					<b-table-column label="Delete">
+						<a @click="deleteProduct(props.row)" class="button has-background-danger has-text-white">Delete</a>
+					</b-table-column>
 				</template>
 			</b-table>
 		</div>
@@ -82,25 +85,16 @@ export default {
 			this.currentProduct = product;
 			this.dialog = true;
 		},
+		deleteProduct(product) {
+			if(confirm('Delete Product?')) {
+				this.$store.dispatch('deleteProduct', product);
+			}
+		},
 		handleAdd(e) {
 			if(e.altKey && e.code === 'KeyA') {
 				this.addProduct();
 			}
 		}
-		// validateRemove(product) {
-		// 	this.removeProduct = product;
-		// },
-
-		// async remove() {
-		// 	const response = productsService.deleteProduct(this.removeProduct);
-		// 	if(response.data.removed === 1) {	
-		// 		let index = this.products.findIndex((prod) => prod._id === this.removeProduct._id);
-		// 		this.products.splice(index, 1);
-		// 		this.removeProduct = {};
-		// 		this.removeList = {};
-		// 	}
-			
-		// }
 	},
 	created() {
 		this.$store.dispatch('getProducts');
