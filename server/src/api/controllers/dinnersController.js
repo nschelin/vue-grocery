@@ -4,6 +4,7 @@
         created: Date,
         modified: Date,
         products: [Product],
+        cost: Number
     }
 */
 

@@ -3,7 +3,9 @@
 		<div class="column">
 			<div class="columns is-mobile">
 				<div class="column is-5 is-offset-7">
-					<b-button type="is-primary" class="is-pulled-right" @click="addDinner()"><span class="altkey">A</span>dd Dinner</b-button>
+					<b-button type="is-primary" class="is-pulled-right" @click="addDinner()">
+						<span class="altkey">A</span>dd Dinner
+					</b-button>
 				</div>
 			</div>
 		</div>
@@ -18,7 +20,7 @@
 						<a @click="editDinner(props.row)">{{ props.row.name }}</a>
 					</b-table-column>
 					<b-table-column field="price" label="Price">
-						{{ props.row.price | currency }}
+						{{ props.row.cost | currency }}
 					</b-table-column>
 					<b-table-column field="created" label="Created">
 						{{ props.row.created | date }}
@@ -41,7 +43,7 @@
 						 </div>
 					 </div>
 					 <div class="card-content">
-						<!-- <DinnerDetails v-model="currentDinner" :active="dialog"  /> -->
+						<DinnerDetails v-model="currentDinner" :active="dialog"  />
 					 </div>
 				 </div>
 		</b-modal>
@@ -50,7 +52,7 @@
 
 <script>
 
-
+import DinnerDetails from './DinnerDetails';
 import { mapState } from 'vuex';
 
 export default {
@@ -61,7 +63,7 @@ export default {
 	computed: {
 		...mapState({
 			// NOTE: state.moduleName.dinnersObject.dinnersArrayOfActualDinnerss
-			dinners: state => state.dinnersMod.dinners
+			dinners: state => state.dinnersMod.dinners,
 		}),
 		sortedDinners: function() {
 			if(this.dinners && this.dinners.length) {
@@ -77,7 +79,8 @@ export default {
 		addDinner() {
 			this.currentDinner = {
 				name: '',
-				price: 0
+				products:[],
+				cost: 0
 			}
 			this.dialog = true;
 		},
@@ -104,7 +107,7 @@ export default {
 		window.removeEventListener('keypress', this.handleAdd);
 	},
 	components: {
-		// DinnerDetails
+		DinnerDetails
 	}
 }
 
