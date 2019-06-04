@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<Navigation />
-		<div class="column">
+		<div class="column main-container">
 			<transition name="slide-left">
 				<router-view></router-view>
 			</transition>
@@ -71,6 +71,10 @@ export default {
 </script>
 
 <style>
+
+	.main-container {
+		margin-top: 70px;
+	}
 	.home {
 		cursor: pointer;
 	}

@@ -22,11 +22,16 @@
 const { ProductRepo } = require('../../db');
 const db = new ProductRepo();
 
+// exports.list = async (req, res) => {
+// 	const page = req.query.page || 1;
+// 	const pageSize = req.query.pageSize || 5;
+// 	const productsInfo = await db.list(+page, +pageSize);
+// 	res.send(productsInfo);
+// };
+
 exports.list = async (req, res) => {
-	const page = req.query.page || 1;
-	const pageSize = req.query.pageSize || 5;
-	const productsInfo = await db.list(+page, +pageSize);
-	res.send(productsInfo);
+	const allProducts = await db.all();
+	res.send(allProducts);
 };
 
 exports.get = async (req, res) => {

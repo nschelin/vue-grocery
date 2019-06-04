@@ -17,20 +17,9 @@ router.put('/product/:id', productsController.update);
 router.delete('/product/:id', productsController.delete);
 
 router.get('/dinners', dinnersController.list);
-router.get('/dinner/:id', dinnersController.get);
+//router.get('/dinner/:id', dinnersController.get);
 router.post('/dinner', dinnersController.add);
-router.put('/dinner/:id', dinnersController.update);
-router.delete('/dinner/:id', dinnersController.delete);
-
-// router.get('/products', Products.list);
-// router.get('/products/:id', Products.get);
-// router.post('/product', Products.post);
-// router.put('/products/:id', Products.put);
-// router.delete('/products/:id', Products.delete);
-
-// router.get('/lists', Lists.list);
-// router.get('/lists/:id', Lists.get);
-// router.post('/list', Lists.post);
-// router.delete('/lists/:id', Lists.delete);
+//router.put('/dinner/:id', dinnersController.update);
+//router.delete('/dinner/:id', dinnersController.delete);
 
 module.exports = router;

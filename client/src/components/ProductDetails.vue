@@ -14,7 +14,7 @@
 			<div class="columns">
 				<div class="column is-offset-9">
 					<div class="buttons">
-						<b-button type="is-primary" native-type="submit">
+						<b-button type="is-primary" native-type="submit" :disabled="!product.name">
 							Save
 						</b-button>
 						<b-button @click="$parent.close()">

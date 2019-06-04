@@ -22,27 +22,29 @@
                 </div>
             </div>
 
-            <h3 class="subtitle">Products</h3>
-            
-            <div class="box" v-if="dinner.products.length > 0">
-                <div class="columns is-mobile" v-for="(product, index) in dinner.products" :key="index">
-                    <div class="column is-6">
-                        <b-field label="Product">
-                            <b-select placeholder="Select Product" v-model="dinner.products[index]">
-                                <option v-for="product in products" :value="product" :key="product._id">
-                                    {{ product.name }}
-                                </option>
-                            </b-select>
-                        </b-field>
-                    </div>
-                    <div class="column is-4">
-                        <label class="label">Product Cost</label>
-                        <div>
-                            {{ product.price | currency }}
+            <div v-if="dinner.products.length > 0">
+                <h3 class="subtitle">Products</h3>
+                
+                <div class="box">
+                    <div class="columns is-mobile" v-for="(product, index) in dinner.products" :key="index">
+                        <div class="column is-6">
+                            <b-field label="Product">
+                                <b-select placeholder="Select Product" v-model="dinner.products[index]">
+                                    <option v-for="product in products" :value="product" :key="product._id">
+                                        {{ product.name }}
+                                    </option>
+                                </b-select>
+                            </b-field>
                         </div>
-                    </div>
-                    <div class="column is-2">
-                        <b-button type="is-danger" outlined @click="dinner.products.splice(index, 1)">Remove</b-button>
+                        <div class="column is-4">
+                            <label class="label">Product Cost</label>
+                            <div>
+                                {{ product.price | currency }}
+                            </div>
+                        </div>
+                        <div class="column is-2">
+                            <b-button type="is-danger" outlined @click="dinner.products.splice(index, 1)">Remove</b-button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,12 +79,12 @@
         },
 		methods: {
 			saveDinner() {
-				// if(!this.product._id) {
-				// 	this.$store.dispatch('addProduct', this.product);				
-				// }
-				// else {
-				// 	this.$store.dispatch('updateProduct', this.product);				
-				// }
+				if(!this.dinner._id) {
+					this.$store.dispatch('addDinner', this.dinner);				
+				}
+				else {
+					this.$store.dispatch('updateDinner', this.dinner);				
+				}
 
 				this.$parent.close();
 			}

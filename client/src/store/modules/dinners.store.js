@@ -30,6 +30,28 @@ const actions = {
 		}
 
 		commit('SET_DINNERS', dinnerInfo.dinners);
+	},
+	async addDinner({ commit }, dinner) {
+		const { data: addedDinner, error } = await dinnerService.insertDinner(
+			dinner
+		);
+		if (error) {
+			console.error(error);
+			return false;
+		}
+
+		commit('ADD_DINNER', addedDinner);
+	},
+	async updateDinner({ commit }, dinner) {
+		const { data: updatedDinner, error } = await dinnerService.updateDinner(
+			dinner
+		);
+		if (error) {
+			console.error(error);
+			return false;
+		}
+
+		commit('UPDATE_DINNER', updatedDinner);
 	}
 };
 

@@ -29,6 +29,15 @@ class ProductRepo {
 		});
 	}
 
+	async all() {
+		return await new Promise((resolve, reject) => {
+			productsDb.find({}, (err, docs) => {
+				if (err) reject(err);
+				resolve(docs);
+			});
+		});
+	}
+
 	async total() {
 		return await new Promise((resolve, reject) => {
 			productsDb.count({}, (err, count) => {

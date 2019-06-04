@@ -22,16 +22,13 @@ const mutations = {
 
 const actions = {
 	async getProducts({ commit }) {
-		const {
-			data: productsInfo,
-			error
-		} = await productService.getProducts();
+		const { data: products, error } = await productService.getProducts();
 		if (error) {
 			console.error(error);
 			return false;
 		}
 
-		commit('SET_PRODUCTS', productsInfo.products);
+		commit('SET_PRODUCTS', products);
 	},
 	async addProduct({ commit }, product) {
 		const {
