@@ -12,7 +12,7 @@
 			</div>
 
 			<div class="columns">
-				<div class="column is-offset-9">
+				<div class="column">
 					<div class="buttons">
 						<b-button type="is-primary" native-type="submit" :disabled="!product.name">
 							Save

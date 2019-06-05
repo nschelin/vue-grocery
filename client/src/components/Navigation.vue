@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar has-shadow is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <router-link class="navbar-item is-size-1-mobile is-size-2-tablet has-text-weight-semibold" to="/" active-class="" exact>
+        <router-link class="navbar-item has-text-weight-bold" to="/" active-class="" exact>
           <span class="altkey">G</span>rocery List
         </router-link>
 
@@ -48,6 +48,10 @@
 </script>
 
 <style lang="scss" scoped>
+    nav {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
     .router-link-active {
         background-color: #fafafa;
         color: #7957d5;;

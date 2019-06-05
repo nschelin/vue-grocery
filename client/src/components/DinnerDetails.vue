@@ -1,32 +1,64 @@
 <template>
 	<div class="column" v-if="dinner !== null">
 		<form @submit.prevent="saveDinner()">
-            <div class="columns">
-                <div class="column">
-                    <b-field label="Dinner Name">
-                        <b-input v-model="dinner.name" ref="dinnerName"></b-input>
-                    </b-field>
-                </div>
-                <div class="column">
-                    <div class="columns is-mobile">
-                        <div class="column" v-if="total > 0">
-                            <label class="label">Cost</label>
-                            <div>
-                                {{ total | currency }}
-                            </div>
+            <div class="field is-horizontal">
+                <div class="field-body">
+                    <div class="field">
+                        <label class="label">Dinner Name</label>
+                        <div class="control">
+                            <input type="text" class="input" ref="dinnerName" v-model="dinner.name" />
                         </div>
-                        <div class="column">
-                            <b-button type="is-primary is-pulled-right" @click="dinner.products.push({})">Add Product</b-button>
+                    </div>
+                    <div class="field" v-if="total > 0">
+                        <label class="label">Cost</label>
+                        <div class="control">
+                            {{ total | currency}}
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div v-if="dinner.products.length > 0">
-                <h3 class="subtitle">Products</h3>
-                
-                <div class="box">
-                    <div class="columns is-mobile" v-for="(product, index) in dinner.products" :key="index">
+            
+            <div class="field is-horizontal">
+                <div class="field-body">
+                    <div class="field">
+                        <h3 class="subtitle" v-if="dinner.products.length > 0">Products</h3>
+                    </div>
+                    <div class="field">
+                        <div class="control is-clearfix">
+                            <button type="button" class="button is-primary is-pulled-right" @click="dinner.products.push({})">
+                                Add Product
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div v-if="dinner.products.length > 0">                
+                <div class="box" style="margin-bottom: 20px;">
+                    <div class="field is-horizontal" v-for="(product, index) in dinner.products" :key="index">
+                        <div class="field-body">
+                            <div class="field">
+                                <label class="label">Product Name</label>
+                                <b-select placeholder="Select Product" v-model="dinner.products[index]">
+                                    <option v-for="product in products" :value="product" :key="product._id">
+                                        {{ product.name }}
+                                    </option>
+                                </b-select>                                    
+                            </div>
+                            <div class="field">
+                                <label class="label">Product Cost</label>
+                                <div>
+                                    {{ product.price | currency }}
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control is-clearfix">
+                                    <button type="button" style="margin-top: 20px;" class="button is-danger is-outlined is-pulled-right">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="columns is-mobile" v-for="(product, index) in dinner.products" :key="index">
                         <div class="column is-6">
                             <b-field label="Product">
                                 <b-select placeholder="Select Product" v-model="dinner.products[index]">
@@ -45,18 +77,20 @@
                         <div class="column is-2">
                             <b-button type="is-danger" outlined @click="dinner.products.splice(index, 1)">Remove</b-button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
-            <div class="column is-clearfix">
-                <div class="buttons is-pulled-right">
-                    <b-button type="is-primary" native-type="submit" :disabled="!dinner.name">
-                        Save
-                    </b-button>
-                    <b-button @click="$parent.close()">
-                        Cancel
-                    </b-button>
+            <div class="field">
+                <div class="control is-clearfix">
+                    <div class="buttons is-pulled-right">
+                        <b-button type="is-primary" native-type="submit" :disabled="!dinner.name">
+                            Save
+                        </b-button>
+                        <b-button @click="$parent.close()">
+                            Cancel
+                        </b-button>
+                    </div>
                 </div>
             </div>
 		</form>
@@ -93,7 +127,9 @@
             this.$store.dispatch('getProducts');
         },
 		mounted() {
-			this.$nextTick(() => setTimeout(() => this.$refs.dinnerName.$el.querySelector('input').focus(), 100));
+			this.$nextTick(() => setTimeout(() => 
+                this.$refs.dinnerName.focus()
+            , 100));
 			
 			this.dinner = this.value !== undefined ? { ...this.value } : null
 		},

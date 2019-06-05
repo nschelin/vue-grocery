@@ -1,8 +1,8 @@
 <template>
-	<div class="container">
+	<div>
 		<Navigation />
 		<div class="column main-container">
-			<transition name="slide-left">
+			<transition name="slide-left" mode="out-in">
 				<router-view></router-view>
 			</transition>
 		</div>
@@ -73,7 +73,7 @@ export default {
 <style>
 
 	.main-container {
-		margin-top: 70px;
+		position: relative mode="out-in";
 	}
 	.home {
 		cursor: pointer;
@@ -83,11 +83,37 @@ export default {
 		text-decoration: underline;
 	}
 
+	.underline {
+		text-decoration: underline;
+	}
+
 	.datatable__actions__select {
 		display: none !important;
 	}
 
+	/* 	transition taken from:
+		https://markus.oberlehner.net/blog/vue-router-page-transitions/
+	*/
+	.slide-left-enter-active,
+	.slide-left-leave-active {
+		transition-duration: 0.5s;
+		transition-property: height, opacity, transform;
+		transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+		overflow: hidden;
+	}
+
 	.slide-left-enter {
+		opacity: 0;
+		transform: translate(2em, 0);
+	}
+
+	.slide-left-leave-active {
+		opacity: 0;
+		transform: translate(-2em, 0);
+	}
+
+
+	/* .slide-left-enter {
 		opacity: 0;
 		transform: translate(100%, 0);
 	}
@@ -103,9 +129,7 @@ export default {
 		transition: all .8s cubic-bezier(.35,0,.25,1);
 	}
 
-	.underline {
-		text-decoration: underline;
-	}
+	
 
 	@media (max-width: 768px) {
 		.slide-left-enter-active, 
@@ -113,7 +137,7 @@ export default {
 			margin: 0 auto;
 			width: 98%;
 		}
-	}
+	} */
 /*#app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
