@@ -6,7 +6,7 @@ import Router from 'vue-router';
 // import Products from '@/components/Products';
 // import ProductDetails from '@/components/ProductDetails';
 
-import Home from '../views/Home.vue';
+import Home from '../views/HomeView.vue';
 
 Vue.use(Router);
 
@@ -31,17 +31,17 @@ export default new Router({
 		{
 			path: '/lists',
 			name: 'Lists',
-			component: () => import('../views/Lists.vue')
+			component: () => import('../views/ListsView.vue')
 		},
 		{
 			path: '/products',
 			name: 'Products',
-			component: () => import('../views/Products.vue')
+			component: () => import('../views/ProductsView.vue')
 		},
 		{
 			path: '/dinners',
 			name: 'Dinners',
-			component: () => import('../views/Dinners.vue')
+			component: () => import('../views/DinnersView.vue')
 		}
 		// {
 		// 	path: '/products/add',

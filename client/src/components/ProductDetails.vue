@@ -10,10 +10,9 @@
 					<money v-model="product.price" v-bind="moneyConfig" class="input" icon="currency-usd"></money>
 				</div>
 			</div>
-
-			<div class="columns">
-				<div class="column">
-					<div class="buttons">
+			<div class="field">
+				<div class="control is-clearfix">
+					<div class="buttons is-pulled-right">
 						<b-button type="is-primary" native-type="submit" :disabled="!product.name">
 							Save
 						</b-button>

@@ -17,9 +17,9 @@ router.put('/product/:id', productsController.update);
 router.delete('/product/:id', productsController.delete);
 
 router.get('/dinners', dinnersController.list);
-//router.get('/dinner/:id', dinnersController.get);
+router.get('/dinner/:id', dinnersController.get);
 router.post('/dinner', dinnersController.add);
-//router.put('/dinner/:id', dinnersController.update);
-//router.delete('/dinner/:id', dinnersController.delete);
+router.put('/dinner/:id', dinnersController.update);
+router.delete('/dinner/:id', dinnersController.delete);
 
 module.exports = router;

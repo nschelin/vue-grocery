@@ -53,31 +53,13 @@
                             </div>
                             <div class="field">
                                 <div class="control is-clearfix">
-                                    <button type="button" style="margin-top: 20px;" class="button is-danger is-outlined is-pulled-right">Remove</button>
+                                    <button type="button" style="margin-top: 20px;" 
+                                            class="button is-danger is-outlined is-pulled-right" 
+                                            @click="dinner.products.splice(index, 1)">Remove</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="columns is-mobile" v-for="(product, index) in dinner.products" :key="index">
-                        <div class="column is-6">
-                            <b-field label="Product">
-                                <b-select placeholder="Select Product" v-model="dinner.products[index]">
-                                    <option v-for="product in products" :value="product" :key="product._id">
-                                        {{ product.name }}
-                                    </option>
-                                </b-select>
-                            </b-field>
-                        </div>
-                        <div class="column is-4">
-                            <label class="label">Product Cost</label>
-                            <div>
-                                {{ product.price | currency }}
-                            </div>
-                        </div>
-                        <div class="column is-2">
-                            <b-button type="is-danger" outlined @click="dinner.products.splice(index, 1)">Remove</b-button>
-                        </div>
-                    </div> -->
                 </div>
             </div>
 
@@ -107,12 +89,13 @@
         }),
         computed: {
             ...mapState({
-                products: state => state.productsMod.products
+                products: state => state.productsMod.products.slice().sort((a,b) => a.name > b.name ? 1 : -1)
             }),
             total: function() { return this.dinner !== null ? this.dinner.products.reduce((sum, product) => sum += (product.price ? product.price : 0), 0) : 0; }
         },
 		methods: {
 			saveDinner() {
+                this.dinner.cost = this.total;
 				if(!this.dinner._id) {
 					this.$store.dispatch('addDinner', this.dinner);				
 				}
