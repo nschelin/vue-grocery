@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="container">
 		<Navigation />
 		<div class="column main-container">
 			<transition name="slide-left" mode="out-in">
