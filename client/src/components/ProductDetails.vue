@@ -17,7 +17,7 @@
 							Save
 						</b-button>
 						<b-button @click="$parent.close()">
-							Cancel
+							<span class="altkey">C</span>ancel
 						</b-button>
 					</div>
 				</div>
@@ -50,8 +50,19 @@
 				}
 
 				this.$parent.close();
-			}
+			},
+			handleCancel(e) {
+                if(e.altKey && e.code === 'KeyC') {
+				    this.$parent.close();
+			    }
+            }
 		},
+		created() {
+            window.addEventListener('keypress', this.handleCancel);
+        },
+        destroyed() {
+            window.removeEventListener('keypress', this.handleCancel);
+        },
 		mounted() {
 			this.$nextTick(() => setTimeout(() => this.$refs.productName.$el.querySelector('input').focus(), 100));
 			
