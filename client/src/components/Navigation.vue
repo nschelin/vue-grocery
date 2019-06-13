@@ -4,7 +4,7 @@
         <router-link class="navbar-item has-text-weight-bold" to="/" active-class="" exact>
           <span class="altkey">G</span>rocery List
         </router-link>
-        <div class="theme-button" @click="clicked = !clicked"><span :class="[clicked ? 'mdi-lightbulb' : 'mdi-lightbulb-on-outline' ]" class="mdi"></span></div>
+        <!-- <div class="theme-button" @click="clicked = !clicked"><span :class="[clicked ? 'mdi-lightbulb' : 'mdi-lightbulb-on-outline' ]" class="mdi"></span></div> -->
         <div role="button" @click="show = !show" class="navbar-burger burger" :class="{ 'is-active': show }" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -75,12 +75,12 @@
         color: #7957d5;;
     }
 
-    .theme-button {
-      display: block;
-      margin-left: auto;
-      padding: 10px;
-    }
-    .navbar-burger {
-      margin-left: 0;
-    }
+    // .theme-button {
+    //   display: block;
+    //   margin-left: auto;
+    //   padding: 10px;
+    // }
+    // .navbar-burger {
+    //   margin-left: 0;
+    // }
 </style>

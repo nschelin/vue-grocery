@@ -65,7 +65,7 @@ export default {
 			// NOTE: state.moduleName.dinnersObject.dinnersArrayOfActualDinnerss
 			dinners: state => state.dinnersMod.dinners,
 		}),
-		sortedDinners: function() {
+		sortedDinners() {
 			if(this.dinners && this.dinners.length) {
 				return this.dinners.slice().sort((a,b) => {
 					return a.name > b.name ? 1 : -1;

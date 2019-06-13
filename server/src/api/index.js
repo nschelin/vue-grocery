@@ -3,12 +3,15 @@
 
 const productsController = require('./controllers/productsController');
 const dinnersController = require('./controllers/dinnersController');
+const randomNameController = require('./controllers/randomNameController');
 
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
 	res.send({ message: 'hello from api!' });
 });
+
+router.get('/random-name', randomNameController.get);
 
 router.get('/products', productsController.list);
 router.get('/product/:id', productsController.get);
