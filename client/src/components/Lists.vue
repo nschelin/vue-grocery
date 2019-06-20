@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="hey">
 		<div class="column">
 			<div class="columns is-mobile">
 				<div class="column is-5 is-offset-7">
@@ -16,10 +16,31 @@
 					:default-sort-direction="'asc'"
 					:default-sort="lists.name">
 				<teamplte slot-scope="props">
-
+					<b-table-column field="name" label="Name">
+						{{ props.row.name }}
+					</b-table-column>  
 				</teamplte>
 			</b-table>
 		</div>
+		<div class="column" v-else>
+			<div class="box no-items">
+				No Lists Available
+			</div>
+		</div>
+
+		<b-modal :active.sync="dialog"
+				:can-cancel="false">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-header-title has-background-primary has-text-white">
+						Add/Edit List
+					</div>
+				</div>
+				<div class="card-content">
+					<ListDetails v-model="currentList" :active="dialog" />
+				</div>
+			</div>
+		</b-modal>
 	</div>
 </template>
 
@@ -56,10 +77,15 @@
 					products:[],
 					dinners:[],
 					cost: 0
-				}
+				};
+
+				this.dialog = true;
 			}
 		},
 		mounted() {			
+		},
+		components: {
+			ListDetails
 		}
 	}
 

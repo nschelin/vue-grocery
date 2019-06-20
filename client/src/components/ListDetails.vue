@@ -1,6 +1,19 @@
 <template>
-	<div>
-		
+	<div class="column" v-if="list !== null">
+		<form @submit.prevent="saveList()">
+			<div class="field">
+                <div class="control is-clearfix">
+                    <div class="buttons is-pulled-right">
+                        <b-button type="is-primary" native-type="submit" :disabled="!dinner.name">
+                            Save
+                        </b-button>
+                        <b-button @click="$parent.close()">
+                            <span class="altkey">C</span>ancel
+                        </b-button>
+                    </div>
+                </div>
+            </div>
+		</form>
 	</div>
 </template>
 
@@ -19,14 +32,21 @@
 			})
 		},
 		methods: {
-		
+			saveList() {
+
+			},
+			handleCancel(e) {
+				if(e.altKey && e.code === 'KeyC') {
+					this.$parent.close();
+				}
+			}
 		},
 		created() {
 			this.$store.dispatch('getProducts');
 			this.$store.dispatch('getDinners');
 		},
 		mounted() {
-			
+			this.list = this.value !== undefined ? { ...this.value } : null;
 		}
 	}
 </script>

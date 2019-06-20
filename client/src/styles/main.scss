@@ -1,0 +1,44 @@
+	.main-container {
+		position: relative;
+	}
+	.home {
+		cursor: pointer;
+	}
+
+	.home:hover {
+		text-decoration: underline;
+	}
+
+	.underline {
+		text-decoration: underline;
+	}
+
+	.datatable__actions__select {
+		display: none !important;
+	}
+
+	/* 	transition taken from:
+		https://markus.oberlehner.net/blog/vue-router-page-transitions/
+	*/
+	.slide-left-enter-active,
+	.slide-left-leave-active {
+		transition-duration: 0.5s;
+		transition-property: height, opacity, transform;
+		transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+		overflow: hidden;
+	}
+
+	.slide-left-enter {
+		opacity: 0;
+		transform: translate(2em, 0);
+	}
+
+	.slide-left-leave-active {
+		opacity: 0;
+		transform: translate(-2em, 0);
+	}
+
+
+.box.no-items {
+    text-align: center;
+}

@@ -34,6 +34,11 @@
 				</template>
 			</b-table>
 		</div>
+		<div class="column" v-else>
+			<div class="box no-items">
+				No Dinners Available
+			</div>
+		</div>
 		<b-modal :active.sync="dialog" 
 				 :can-cancel="false">
 				 <div class="card">
