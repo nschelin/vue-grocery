@@ -29,7 +29,8 @@
 		</div>
 
 		<b-modal :active.sync="dialog"
-				:can-cancel="false">
+				:can-cancel="false"
+				full-screen>
 			<div class="card">
 				<div class="card-header">
 					<div class="card-header-title has-background-primary has-text-white">

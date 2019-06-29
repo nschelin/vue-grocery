@@ -1,5 +1,5 @@
 <template>
-	<div class="column" v-if="dinner !== null">
+	<div class="column form-container" v-if="dinner !== null">
 		<form @submit.prevent="saveDinner()">
             <div class="field is-horizontal">
                 <div class="field-body">
@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="field">
+            <div class="field button-row">
                 <div class="control is-clearfix">
                     <div class="buttons is-pulled-right">
                         <b-button type="is-primary" native-type="submit" :disabled="!dinner.name">
@@ -136,4 +136,22 @@
         border-radius: 3px;
         padding: 8px;
     }
+
+    .form-container {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        & > form {
+            @extend .form-container
+        }
+
+        form {
+            :last-child {
+                margin-top: auto;
+            }
+        }
+    }
+
+
 </style>

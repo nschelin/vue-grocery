@@ -40,7 +40,8 @@
 			</div>
 		</div>
 		<b-modal :active.sync="dialog" 
-				 :can-cancel="false">
+				 :can-cancel="false"
+				 full-screen>
 				 <div class="card">
 					 <div class="card-header">
 						 <div class="card-header-title has-background-primary has-text-white">
@@ -119,11 +120,18 @@ export default {
 </script>
 <style scoped>
 	.card {
-		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 	}
 
-	.card-header-title {
+	.card-content {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+	}
+	/* .card-header-title {
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
-	}
+	} */
 </style>
