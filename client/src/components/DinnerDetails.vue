@@ -137,21 +137,21 @@
         padding: 8px;
     }
 
-    .form-container {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
+    // .form-container {
+    //     display: flex;
+    //     flex: 1;
+    //     flex-direction: column;
 
-        & > form {
-            @extend .form-container
-        }
+    //     & > form {
+    //         @extend .form-container
+    //     }
 
-        form {
-            :last-child {
-                margin-top: auto;
-            }
-        }
-    }
+    //     form {
+    //         :last-child {
+    //             margin-top: auto;
+    //         }
+    //     }
+    // }
 
 
 </style>

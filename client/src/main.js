@@ -6,7 +6,7 @@ import router from './router';
 import store from './store';
 import filters from './filters';
 //import 'vuetify/dist/vuetify.min.css';
-import 'buefy/dist/buefy.min.css';
+import 'buefy/dist/buefy.css';
 
 //Vue.use(Vuetify);
 Vue.use(Buefy);

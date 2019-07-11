@@ -42,13 +42,13 @@
 		<b-modal :active.sync="dialog" 
 				 :can-cancel="false"
 				 full-screen>
-				 <div class="card">
-					 <div class="card-header">
-						 <div class="card-header-title has-background-primary has-text-white">
+				 <div class="modal-card">
+					 <header class="modal-card-head has-background-primary">
+						 <div class="modal-card-title has-text-white">
 						 	Add/Edit Dinner
 						 </div>
-					 </div>
-					 <div class="card-content">
+					 </header>
+					 <div class="modal-card-body">
 						<DinnerDetails v-model="currentDinner" :active="dialog"  />
 					 </div>
 				 </div>
@@ -119,19 +119,9 @@ export default {
 
 </script>
 <style scoped>
-	.card {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
+	.modal-card-head {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
 	}
-
-	.card-content {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-	}
-	/* .card-header-title {
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-	} */
+	
 </style>
