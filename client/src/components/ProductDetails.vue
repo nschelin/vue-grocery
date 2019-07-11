@@ -48,12 +48,13 @@
 				else {
 					this.$store.dispatch('updateProduct', this.product);				
 				}
-
+				this.$emit('productSaved', { message: 'saved', product: this.product });
 				this.$parent.close();
 			},
 			handleCancel(e) {
                 if(e.altKey && e.code === 'KeyC') {
-				    this.$parent.close();
+					this.$parent.close();
+					this.$emit('productSaved', { message: 'cancelled' });
 			    }
             }
 		},

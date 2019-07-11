@@ -24,10 +24,15 @@
                         <h3 class="subtitle" v-if="dinner.products.length > 0">Products</h3>
                     </div>
                     <div class="field">
-                        <div class="control is-clearfix">
-                            <button type="button" class="button is-primary is-pulled-right" @click="dinner.products.push({})">
-                                Add Product
-                            </button>
+                        <div class="control">
+                            <div class="buttons is-pulled-right">
+                                <button type="button" class="button is-primary" :disabled="noSelection" @click="dinner.products.push({})">
+                                    Add Product
+                                </button>
+                                <button type="button" class="button is-danger" v-if="dinner.products.length > 0" @click="addProduct()">
+                                    Create Product
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,22 +81,64 @@
                 </div>
             </div>
 		</form>
+
+        <b-modal :active.sync="dialog" 
+				 :can-cancel="false">
+				 <div class="card">
+					 <div class="card-header">
+						 <div class="card-header-title has-background-primary has-text-white">
+						 	Add Product
+						 </div>
+					 </div>
+					 <div class="card-content">
+						<ProductDetails v-model="newProduct" :active="dialog" @productSaved="handleSavedProduct"  />
+					 </div>
+				 </div>
+		</b-modal>
+        
 	</div>
 </template>
 
 <script>
+	import ProductDetails from './ProductDetails';
     import { mapState } from 'vuex';
-
 	export default {
 		props: ['value', 'active'],
 		data: () => ({
-			dinner: null,
+            dinner: null,
+            dialog: false,
+            newProduct: null
         }),
         computed: {
             ...mapState({
                 products: state => state.productsMod.products.slice().sort((a,b) => a.name > b.name ? 1 : -1)
             }),
-            total: function() { return this.dinner !== null ? this.dinner.products.reduce((sum, product) => sum += (product.price ? product.price : 0), 0) : 0; }
+            total: function() { return this.dinner !== null ? this.dinner.products.reduce((sum, product) => sum += (product.price ? product.price : 0), 0) : 0; },
+            noSelection: function() { 
+                // If no products added, allow adding
+                if(this.dinner.products.length === 0) 
+                    return false;
+                
+                // check if any product hasn't been selected or not by check if any objects with _id of a product
+                const index = this.dinner.products.findIndex(c => !c.hasOwnProperty('_id'));
+                
+                return index > -1;
+            }
+        },
+        watch: {
+            products: function(nv,ov) {
+                if(nv.length > ov.length && ov.length !== 0) {
+                    const diff = nv.filter(x => !ov.some(y => y._id == x._id));
+                    if(diff.length === 1) {
+                        this.$nextTick(function(){
+                            console.log(diff[0]);
+                            this.dinner.products.push(diff[0]);
+
+
+                        });
+                    }
+                }
+            }
         },
 		methods: {
 			saveDinner() {
@@ -104,7 +151,20 @@
 				}
 
 				this.$parent.close();
-			},
+            },
+            addProduct() {
+                this.newProduct = {
+                    name: '',
+                    price: 0
+                }
+                this.dialog = true;
+            },
+            handleSavedProduct(e) {
+                if(e.message === 'saved') {
+                    this.$store.dispatch('getProducts');
+                    
+                }
+            },
             handleCancel(e) {
                 if(e.altKey && e.code === 'KeyC') {
 				    this.$parent.close();
@@ -124,7 +184,10 @@
             , 100));
 			
 			this.dinner = this.value !== undefined ? { ...this.value } : null
-		},
+        },
+        components: {
+            ProductDetails
+        }
 	}
 </script>
 
