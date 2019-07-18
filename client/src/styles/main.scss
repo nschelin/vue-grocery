@@ -5,66 +5,103 @@ $bgdark: #333;
 $body-background-color: $bgdark;
 $body-color: $white;
 
-$speed-slow: 150ms !default;
-$speed-slower: 250ms !default;
+$primary: #8c67ef;
+$primary-invert: findColorInvert($primary);
 
-$primary: #7957d5 !default;
-$primary-invert: $white !default;
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
 
-$info: #167df0 !default;
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "twitter": ($twitter, $twitter-invert)
+);
 
-$link: $primary !default;
-$link-invert: $primary-invert !default;
-$link-visited: $grey !default;
-$link-focus-border: $primary !default;
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
 
-$label-weight: $weight-semibold !default;
+a.pagination-link, 
+a.pagination-previous,
+a.pagination-next {
+	color: $white;
 
-	// Import Bulma and Buefy styles
-@import '~bulma';
-@import '~buefy/src/scss/buefy';
+	&[disabled="disabled"] {
+		color: $dark !important;
+	}
+
+	&:hover {
+		color: $white;
+	}
+}
+
+.navbar {
+	background-color: $bgdark !important;
 	
-	.main-container {
-		position: relative;
-	}
-	.home {
-		cursor: pointer;
+	.navbar-item {
+		color: $white;
 	}
 
-	.home:hover {
-		text-decoration: underline;
+	.router-link-active {
+		color: $primary;
 	}
+}
 
-	.underline {
-		text-decoration: underline;
-	}
 
-	.datatable__actions__select {
-		display: none !important;
-	}
+.main-container {
+	position: relative;
+}
+.home {
+	cursor: pointer;
+}
 
-	/* 	transition taken from:
-		https://markus.oberlehner.net/blog/vue-router-page-transitions/
-	*/
-	.slide-left-enter-active,
-	.slide-left-leave-active {
-		transition-duration: 0.5s;
-		transition-property: height, opacity, transform;
-		transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-		overflow: hidden;
-	}
+.home:hover {
+	text-decoration: underline;
+}
 
-	.slide-left-enter {
-		opacity: 0;
-		transform: translate(2em, 0);
-	}
+.underline {
+	text-decoration: underline;
+}
 
-	.slide-left-leave-active {
-		opacity: 0;
-		transform: translate(-2em, 0);
-	}
+.datatable__actions__select {
+	display: none !important;
+}
+
+/* 	transition taken from:
+https://markus.oberlehner.net/blog/vue-router-page-transitions/
+*/
+.slide-left-enter-active,
+.slide-left-leave-active {
+	transition-duration: 0.5s;
+	transition-property: height, opacity, transform;
+	transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+	overflow: hidden;
+}
+
+.slide-left-enter {
+	opacity: 0;
+	transform: translate(2em, 0);
+}
+
+.slide-left-leave-active {
+	opacity: 0;
+	transform: translate(-2em, 0);
+}
 
 
 .box.no-items {
-    text-align: center;
+	text-align: center;
 }
+
+// Import Bulma and Buefy styles
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
