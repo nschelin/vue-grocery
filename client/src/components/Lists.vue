@@ -31,13 +31,13 @@
 		<b-modal :active.sync="dialog"
 				:can-cancel="false"
 				full-screen>
-			<div class="card">
-				<div class="card-header">
-					<div class="card-header-title has-background-primary has-text-white">
+			<div class="modal-card">
+				<div class="modal-card-head has-background-primary">
+					<div class="modal-card-title has-text-white">
 						Add/Edit List
 					</div>
 				</div>
-				<div class="card-content">
+				<div class="modal-card-body">
 					<ListDetails v-model="currentList" :active="dialog" />
 				</div>
 			</div>

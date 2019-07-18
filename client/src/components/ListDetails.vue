@@ -16,7 +16,9 @@
 				<div class="field-body">
 					<div class="field">
 						<div class="control is-clearfix">
-							<button class="button is-primary is-pulled-right" type="button" @click="list.dinners.push({})" :disabled="list.dinners.length === days.length">Add Dinner</button>
+							<button class="button is-primary is-pulled-right" type="button" @click="addDinner()" :disabled="list.dinners.length === days.length">
+								<span class="altkey">A</span>dd Dinner
+							</button>
 						</div>
 					</div>
 				</div>
@@ -28,14 +30,14 @@
 						<div class="field-body">
 							<div class="field">
 								<label class="label">Dinner</label>
-								<b-select placeholder="Select Dinner" v-model="list.dinners[index].dinner">
+								<b-select placeholder="Select Dinner" :ref="'dinnerrow'" v-model="list.dinners[index].dinner">
 									<option v-for="dinner in dinners" :value="dinner" :key="dinner._id">
 										{{ dinner.name }}
 									</option>
 								</b-select>
 							</div>
 							<div class="field">
-								<label class="label">Day</label>
+								<label class="label" @click="sortBy('day')">Day</label>
 								<b-select placeholder="Select Day" v-model="list.dinners[index].day">
 									<option v-for="(day, dIndex) in days" :value="day" :key="dIndex">
 										{{ day }}
@@ -70,7 +72,8 @@
 	export default {
 		props: [ 'value', 'active' ],
 		data: () =>({
-			list: null
+			list: null,
+			sortDir: 'asc'
 		}),
 		computed: {
 			...mapState({
@@ -80,8 +83,37 @@
 			})
 		},
 		methods: {
+			addDinner() {
+				this.list.dinners.push({});
+				this.$nextTick(() => {
+					const lastItemIndex = this.list.dinners.length - 1;
+					const select = this.$refs.dinnerrow[lastItemIndex];
+					select.focus();
+				})
+			},
+			sortBy(sortExpression) {
+				switch(sortExpression) {
+					case 'day':
+						
+						this.list.dinners.sort((a,b) => {
+							if(this.sortDir === 'asc')
+								return a.day > b.day ? 1 : -1
+							else
+								return a.day < b.day ? 1 : -1
+
+						});
+						this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
+						break;
+					default: break;
+				}
+			},
 			saveList() {
 
+			},
+			handleAdd(e) {
+				if(e.altKey && e.code === 'KeyA') {
+					this.addDinner();
+				}
 			},
 			handleCancel(e) {
 				if(e.altKey && e.code === 'KeyC') {
@@ -92,6 +124,10 @@
 		created() {
 			this.$store.dispatch('getProducts');
 			this.$store.dispatch('getDinners');
+			window.addEventListener('keypress', this.handleAdd);
+		},
+		destroyed() {
+			window.removeEventListener('keypress', this.handleAdd);
 		},
 		mounted() {
 			this.$nextTick(() => setTimeout(() => 
