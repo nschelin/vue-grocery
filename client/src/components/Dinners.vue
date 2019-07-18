@@ -16,16 +16,16 @@
 					:default-sort-direction="'asc'"
 					:default-sort="dinners.name">
 				<template slot-scope="props">
-					<b-table-column field="name" label="Name">
+					<b-table-column field="name" label="Name" sortable>
 						<a @click="editDinner(props.row)">{{ props.row.name }}</a>
 					</b-table-column>
-					<b-table-column field="price" label="Price">
+					<b-table-column field="price" label="Price" sortable>
 						{{ props.row.cost | currency }}
 					</b-table-column>
-					<b-table-column field="created" label="Created">
+					<b-table-column field="created" label="Created" sortable>
 						{{ props.row.created | date }}
 					</b-table-column>
-					<b-table-column field="modified" label="Modified">
+					<b-table-column field="modified" label="Modified" sortable>
 						{{ props.row.modified | date }}
 					</b-table-column>
 					<b-table-column label="Delete">
