@@ -14,62 +14,57 @@ import Navigation from '@/components/Navigation';
 export default {
 	name: 'app',
 	data() {
-		return { 
+		return {
 			drawer: false
-		}
+		};
 	},
 	methods: {
 		goHome() {
 			this.$router.push({ name: 'Home' });
 		},
-		drawerClick () {		
+		drawerClick() {
 			this.drawer = !this.drawer;
 			//return this.drawer;
 		},
-		navigate(routeName) {		
+		navigate(routeName) {
 			this.$router.push({ name: routeName });
 			this.drawer = !this.drawer;
 		}
 	},
 	created() {
-		window.addEventListener('keyup', (e) => {
-		
-			if(e.altKey && e.code === 'KeyP') {
+		window.addEventListener('keyup', e => {
+			if (e.altKey && e.code === 'KeyP') {
 				this.$router.push({ name: 'Products' });
-			}
-			else if(e.altKey && e.code === 'KeyD') {
+			} else if (e.altKey && e.code === 'KeyD') {
 				this.$router.push({ name: 'Dinners' });
-			}
-			else if(e.altKey && e.code === 'KeyL') {
+			} else if (e.altKey && e.code === 'KeyL') {
 				this.$router.push({ name: 'Lists' });
-			}
-			else if(e.altKey && e.code === 'KeyG') {
+			} else if (e.altKey && e.code === 'KeyG') {
 				this.$router.push({ name: 'Home' });
-			}
-			else {
-				const altKeys = Array.from(document.querySelectorAll('.altkey'));
+			} else {
+				const altKeys = Array.from(
+					document.querySelectorAll('.altkey')
+				);
 				altKeys.forEach(altKey => altKey.classList.remove('underline'));
 			}
 		});
 
-		window.addEventListener('keydown', (e) => {
-			if(e.altKey) {
-				const altKeys = Array.from(document.querySelectorAll('.altkey'));
+		window.addEventListener('keydown', e => {
+			if (e.altKey) {
+				const altKeys = Array.from(
+					document.querySelectorAll('.altkey')
+				);
 				altKeys.forEach(altKey => altKey.classList.add('underline'));
 			}
-			
-		})
+		});
 	},
-	mounted() {
-	
-	},
+	mounted() {},
 	components: {
 		Navigation
 	}
-
-}
+};
 </script>
 
 <style lang="scss">
-	@import './styles/main.scss';
+@import './styles/main.scss';
 </style>

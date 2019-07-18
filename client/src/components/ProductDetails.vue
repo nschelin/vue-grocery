@@ -7,13 +7,22 @@
 			<div class="field">
 				<label class="label"> Product Price</label>
 				<div class="control">
-					<money v-model="product.price" v-bind="moneyConfig" class="input" icon="currency-usd"></money>
+					<money
+						v-model="product.price"
+						v-bind="moneyConfig"
+						class="input"
+						icon="currency-usd"
+					></money>
 				</div>
 			</div>
 			<div class="field">
 				<div class="control is-clearfix">
 					<div class="buttons is-pulled-right">
-						<b-button type="is-primary" native-type="submit" :disabled="!product.name || product.price <= 0">
+						<b-button
+							type="is-primary"
+							native-type="submit"
+							:disabled="!product.name || product.price <= 0"
+						>
 							Save
 						</b-button>
 						<b-button @click="$parent.close()">
@@ -27,62 +36,68 @@
 </template>
 
 <script>
-	import { Money } from 'v-money'
-	export default {
-		props: ['value', 'active'],
-		data: () => ({
-			product: null,
-			moneyConfig: {
-				decimal: '.',
-				thousands: ',',
-				precision: 2,
-				prefix: '$ ',
-				masked: false
-			}
-		}),
-		methods: {
-			saveProduct() {
-				if(!this.product._id) {
-					this.$store.dispatch('addProduct', this.product);				
-				}
-				else {
-					this.$store.dispatch('updateProduct', this.product);				
-				}
-				this.$emit('productSaved', { message: 'saved', product: this.product });
-				this.$parent.close();
-			},
-			handleCancel(e) {
-                if(e.altKey && e.code === 'KeyC') {
-					this.$parent.close();
-					this.$emit('productSaved', { message: 'cancelled' });
-			    }
-            }
-		},
-		created() {
-            window.addEventListener('keypress', this.handleCancel);
-        },
-        destroyed() {
-            window.removeEventListener('keypress', this.handleCancel);
-        },
-		mounted() {
-			this.$nextTick(() => setTimeout(() => this.$refs.productName.$el.querySelector('input').focus(), 100));
-			
-			this.product = this.value !== undefined ? { ...this.value } : null
-
-			// NOTE: Temporary
-			if(!this.product.price) {
-				this.product.price = 0;
-			}
-		},
-		components: {
-			Money
+import { Money } from 'v-money';
+export default {
+	props: ['value', 'active'],
+	data: () => ({
+		product: null,
+		moneyConfig: {
+			decimal: '.',
+			thousands: ',',
+			precision: 2,
+			prefix: '$ ',
+			masked: false
 		}
+	}),
+	methods: {
+		saveProduct() {
+			if (!this.product._id) {
+				this.$store.dispatch('addProduct', this.product);
+			} else {
+				this.$store.dispatch('updateProduct', this.product);
+			}
+			this.$emit('productSaved', {
+				message: 'saved',
+				product: this.product
+			});
+			this.$parent.close();
+		},
+		handleCancel(e) {
+			if (e.altKey && e.code === 'KeyC') {
+				this.$parent.close();
+				this.$emit('productSaved', { message: 'cancelled' });
+			}
+		}
+	},
+	created() {
+		window.addEventListener('keypress', this.handleCancel);
+	},
+	destroyed() {
+		window.removeEventListener('keypress', this.handleCancel);
+	},
+	mounted() {
+		this.$nextTick(() =>
+			setTimeout(
+				() => this.$refs.productName.$el.querySelector('input').focus(),
+				100
+			)
+		);
+
+		this.product = this.value !== undefined ? { ...this.value } : null;
+
+		// NOTE: Temporary
+		if (!this.product.price) {
+			this.product.price = 0;
+		}
+	},
+	components: {
+		Money
 	}
+};
 </script>
 
 <style lang="scss" scoped>
-
-	.buttons {
-		float: right;
-	}
+.buttons {
+	float: right;
+}
 </style>

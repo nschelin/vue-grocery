@@ -1,13 +1,11 @@
 <template>
-  <h4>Home Page</h4>
+	<h4>Home Page</h4>
 </template>
 
 <script>
 export default {
 	data() {
-		return {
-
-		}
+		return {};
 	}
-}
+};
 </script>
