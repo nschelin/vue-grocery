@@ -1,0 +1,13 @@
+a.pagination-link, 
+a.pagination-previous,
+a.pagination-next {
+	color: $white;
+
+	&[disabled="disabled"] {
+		color: $dark !important;
+	}
+
+	&:hover {
+		color: $white;
+	}
+}

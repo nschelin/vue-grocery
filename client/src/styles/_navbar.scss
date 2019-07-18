@@ -1,0 +1,13 @@
+@import './colors';
+
+.navbar {
+	background-color: $bgdark !important;
+	
+	.navbar-item {
+		color: $white;
+	}
+
+	.router-link-active {
+		color: $primary;
+	}
+}
