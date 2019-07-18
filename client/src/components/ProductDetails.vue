@@ -13,7 +13,7 @@
 			<div class="field">
 				<div class="control is-clearfix">
 					<div class="buttons is-pulled-right">
-						<b-button type="is-primary" native-type="submit" :disabled="!product.name">
+						<b-button type="is-primary" native-type="submit" :disabled="!product.name || product.price <= 0">
 							Save
 						</b-button>
 						<b-button @click="$parent.close()">
