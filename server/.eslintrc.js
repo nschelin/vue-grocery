@@ -1,17 +1,26 @@
 module.exports = {
-	root: true,
-	env: {
-		node: true,
-		es6: true
-	},
-	extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-	rules: {
-		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-		'prettier/prettier': ['error', { singleQuote: true, useTabs: true }]
-	},
-	parserOptions: {
-		parser: 'babel-eslint',
-		ecmaVersion: 8
-	}
-};
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "overrides": [
+        {
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
+            }
+        }
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+    }
+}
