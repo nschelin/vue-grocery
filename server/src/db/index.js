@@ -1,5 +1,8 @@
-const { ProductRepo } = require('./repositories/productRepo.js');
-const { DinnerRepo } = require('./repositories/dinnerRepo.js');
-const { ListRepo } = require('./repositories/listRepo.js');
+import { Sequelize } from 'sequelize';
 
-module.exports = { ProductRepo, DinnerRepo, ListRepo };
+const db = new Sequelize({
+	dialect: 'sqlite',
+	storage: `${process.env.DB_FILEPATH}`,
+});
+
+export { db };

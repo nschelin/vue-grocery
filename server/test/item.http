@@ -1,0 +1,15 @@
+# item testing
+@hostname = http://{{host}}:{{port}}
+
+### Examples
+@itemName = "Apple"
+
+### Item Insert Item
+# @name newItemName
+POST {{hostname}}/api/item HTTP/1.1
+Content-Type: application/json
+
+{
+	"name": {{itemName}}
+}
+
