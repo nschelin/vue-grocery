@@ -1,0 +1,31 @@
+# item testing
+@hostname = http://{{host}}:{{port}}
+
+### Examples
+
+### Get ALl Items
+GET {{hostname}}/api/items HTTP/1.1
+Accept: application/json
+
+### Get Item
+GET {{hostname}}/api/item/11 HTTP/1.1
+Accept: application/json
+
+@itemName = "Apple"
+@updateName = "Grape"
+### Item Insert Item
+# @name newItem
+POST {{hostname}}/api/item HTTP/1.1
+Content-Type: application/json
+
+{
+	"name": {{itemName}}
+}
+
+### Update Item
+PUT {{hostname}}/api/item/{{newItem.response.body.item.id}}
+Content-Type: application/json
+
+{
+	"name": {{updateName}}
+}

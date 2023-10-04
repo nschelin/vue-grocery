@@ -1,7 +1,8 @@
 import { Item } from '../../models/item.js';
 
-async function add(itemName) {
-	return await Item.create(itemName);
+async function add(name) {
+	console.log(name);
+	return await Item.create({ name });
 }
 
 async function get(id) {
@@ -16,13 +17,17 @@ async function get(id) {
 	return item;
 }
 
-async function update(id, itemName) {
+async function list() {
+	return await Item.findAll();
+}
+
+async function update(id, name) {
 	const item = await Item.findByPk(id, {
 		attributes: { exclude: ['deleted'] },
 	});
 
 	if (item) {
-		item.name = itemName;
+		item.name = name;
 		await item.save();
 	} else {
 		throw new Error(`item id: ${id}`);
@@ -60,6 +65,7 @@ async function getItem(req, res) {
 async function updateItem(req, res) {
 	const { id } = req.params;
 	const { name } = req.body;
+
 	try {
 		const item = await update(id, name);
 		res.status(200).json({ message: 'Item Updated', item });
@@ -71,4 +77,16 @@ async function updateItem(req, res) {
 	}
 }
 
-export { addItem, getItem, updateItem };
+async function getAll(req, res) {
+	try {
+		const items = await list();
+		res.status(200).json({ message: 'Items Retrieved', items });
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({
+			message: 'Internal Server Error',
+		});
+	}
+}
+
+export { addItem, getItem, getAll, updateItem };

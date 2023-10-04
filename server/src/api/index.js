@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 	const message = 'hello, world';
 	res.send({ message });
 });
+router.get('/items', itemsController.getAll);
 router.get('/item/:id', itemsController.getItem);
 router.post('/item', itemsController.addItem);
 router.put('/item/:id', itemsController.updateItem);
