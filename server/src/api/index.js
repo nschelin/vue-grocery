@@ -1,8 +1,14 @@
 import { Router } from 'express';
 import * as itemsController from './controllers/items.js';
 import * as listsController from './controllers/lists.js';
+import * as listItemsController from './controllers/listItems.js';
 
 const router = Router();
+
+const itemRouter = Router();
+const listRouter = Router();
+const listItemRouter = Router({ mergeParams: true });
+listRouter.use('/list/:listId/listItems', listItemRouter);
 // const { Products } = require('./controllers/productsController');
 // const { Lists } = require('./controllers/listsConstroller');
 
@@ -14,14 +20,21 @@ router.get('/', async (req, res) => {
 	const message = 'hello, world';
 	res.send({ message });
 });
-router.get('/items', itemsController.getAll);
-router.get('/item/:id', itemsController.getItem);
-router.post('/item', itemsController.addItem);
-router.put('/item/:id', itemsController.updateItem);
 
-router.get('/list/:id', listsController.getList);
-router.post('/list', listsController.addList);
+itemRouter.get('/items', itemsController.getAll);
+itemRouter.get('/item/:id', itemsController.getItem);
+itemRouter.post('/item', itemsController.addItem);
+itemRouter.put('/item/:id', itemsController.updateItem);
 
+listRouter.get('/list/:listId', listsController.getList);
+listRouter.post('/list', listsController.addList);
+
+listItemRouter.get('/', listItemsController.getAllListItems);
+listItemRouter.get('/:id', listItemsController.getListItem);
+listItemRouter.post('/', listItemsController.addListItem);
+
+router.use(itemRouter);
+router.use(listRouter);
 // router.get('/random-name', randomNameController.get);
 
 // router.get('/products', productsController.list);

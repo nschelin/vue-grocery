@@ -12,3 +12,7 @@ Content-Type: application/json
 {
 	"name": {{listName}}
 }
+
+### Get List
+GET {{hostname}}/api/list/1 HTTP/1.1
+Accept: application/json

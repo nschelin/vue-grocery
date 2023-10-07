@@ -1,0 +1,12 @@
+# list testing
+@hostname = http://{{host}}:{{port}}
+
+### Examples
+
+### Get ListItem
+GET {{hostname}}/api/list/1/listItems/2 HTTP/1.1
+Accept: application/json
+
+### Get All
+GET {{hostname}}/api/list/1/listItems HTTP/1.1
+Accept: application/json

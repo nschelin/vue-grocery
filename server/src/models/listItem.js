@@ -32,3 +32,5 @@ const ListItem = db.define(
 );
 
 ListItem.belongsTo(List);
+
+export { ListItem };

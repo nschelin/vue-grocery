@@ -22,9 +22,9 @@ async function add({ name }) {
 }
 
 async function getList(req, res) {
-	const { id, includeItems } = req.params;
+	const { listId, includeItems } = req.params;
 	try {
-		const list = await get(id, includeItems);
+		const list = await get(listId, includeItems);
 		res.status(200).json({ message: 'List Retrieved', list });
 	} catch (e) {
 		console.error(e);
