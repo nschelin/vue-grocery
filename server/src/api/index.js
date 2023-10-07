@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as itemsController from './controllers/items.js';
+import * as listsController from './controllers/lists.js';
 
 const router = Router();
 // const { Products } = require('./controllers/productsController');
@@ -17,6 +18,9 @@ router.get('/items', itemsController.getAll);
 router.get('/item/:id', itemsController.getItem);
 router.post('/item', itemsController.addItem);
 router.put('/item/:id', itemsController.updateItem);
+
+router.get('/list/:id', listsController.getList);
+router.post('/list', listsController.addList);
 
 // router.get('/random-name', randomNameController.get);
 

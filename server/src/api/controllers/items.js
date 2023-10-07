@@ -1,8 +1,8 @@
 import { Item } from '../../models/item.js';
 
-async function add(name) {
+async function add({ name, price = 0 }) {
 	console.log(name);
-	return await Item.create({ name });
+	return await Item.create({ name, price });
 }
 
 async function get(id) {
@@ -21,13 +21,14 @@ async function list() {
 	return await Item.findAll();
 }
 
-async function update(id, name) {
+async function update(id, { name, price }) {
 	const item = await Item.findByPk(id, {
 		attributes: { exclude: ['deleted'] },
 	});
 
 	if (item) {
 		item.name = name;
+		item.price = price;
 		await item.save();
 	} else {
 		throw new Error(`item id: ${id}`);
@@ -37,10 +38,10 @@ async function update(id, name) {
 }
 
 async function addItem(req, res) {
-	const { name } = req.body;
+	const { name, price } = req.body;
 	try {
-		const item = await add(name);
-		res.status(200).json({ message: 'Item Added', item });
+		const item = await add({ name, price });
+		res.status(201).json({ message: 'Item Added', item });
 	} catch (e) {
 		console.error(e);
 		res.status(500).json({
@@ -64,10 +65,10 @@ async function getItem(req, res) {
 
 async function updateItem(req, res) {
 	const { id } = req.params;
-	const { name } = req.body;
+	const { name, price } = req.body;
 
 	try {
-		const item = await update(id, name);
+		const item = await update(id, { name, price });
 		res.status(200).json({ message: 'Item Updated', item });
 	} catch (e) {
 		console.error(e);

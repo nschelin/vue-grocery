@@ -1,0 +1,14 @@
+# list testing
+@hostname = http://{{host}}:{{port}}
+
+### Examples
+@listName = "my-new-list"
+@updListName = "my-updated-list"
+### Insert List
+# @name newList
+POST {{hostname}}/api/list HTTP/1.1
+Content-Type: application/json
+
+{
+	"name": {{listName}}
+}

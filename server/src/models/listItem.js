@@ -1,9 +1,17 @@
 import { DataTypes } from 'sequelize';
 import { db } from '../db/index.js';
+import { List } from './list.js';
 
-const Item = db.define(
-	'item',
+const ListItem = db.define(
+	'listItem',
 	{
+		listId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: List,
+				key: 'id',
+			},
+		},
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -19,8 +27,8 @@ const Item = db.define(
 		createdAt: 'created',
 		updatedAt: 'modified',
 		deletedAt: 'deleted',
-		tableName: 'Item',
+		tableName: 'ListItem',
 	}
 );
 
-export { Item };
+ListItem.belongsTo(List);
