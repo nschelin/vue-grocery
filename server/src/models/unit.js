@@ -1,20 +1,12 @@
 import { DataTypes } from 'sequelize';
 import { db } from '../db/index.js';
 
-const Item = db.define(
-	'item',
+const Unit = db.define(
+	'unit',
 	{
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
-		},
-		price: {
-			type: DataTypes.DECIMAL(10, 2),
-			defaultValue: 0.0,
-		},
-		unit: {
-			type: DataTypes.STRING,
-			default: 'item',
 		},
 	},
 	{
@@ -23,8 +15,8 @@ const Item = db.define(
 		createdAt: 'created',
 		updatedAt: 'modified',
 		deletedAt: 'deleted',
-		tableName: 'Item',
+		tableName: 'Unit',
 	}
 );
 
-export { Item };
+export { Unit };

@@ -16,6 +16,25 @@ async function get(id, includeItems) {
 	return list;
 }
 
+async function getByName(name, includeItems) {
+	const list = await List.findOne({
+		where: {
+			name,
+		},
+		attributes: { exclude: ['deleted'] },
+	});
+
+	if (list && includeItems) {
+		await list.getListItems();
+	}
+
+	return list;
+}
+
+async function list() {
+	return await List.findAll();
+}
+
 async function add({ name }) {
 	console.log(name);
 	return await List.create({ name });
@@ -26,6 +45,36 @@ async function getList(req, res) {
 	try {
 		const list = await get(listId, includeItems);
 		res.status(200).json({ message: 'List Retrieved', list });
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({
+			message: 'Internal Server Error',
+		});
+	}
+}
+
+async function getAllLists(req, res) {
+	try {
+		const lists = await list();
+		res.status(200).json({ message: 'Lists Retrieved', lists });
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({
+			message: 'Internal Server Error',
+		});
+	}
+}
+
+async function getListByName(req, res) {
+	const { name } = req.params;
+	try {
+		let message = 'List Retrieved';
+		const list = await getByName(name);
+		if (!list) {
+			message = 'No List';
+		}
+
+		res.status(200).json({ message, list });
 	} catch (e) {
 		console.error(e);
 		res.status(500).json({
@@ -47,4 +96,4 @@ async function addList(req, res) {
 	}
 }
 
-export { addList, getList };
+export { addList, getList, getListByName, getAllLists };

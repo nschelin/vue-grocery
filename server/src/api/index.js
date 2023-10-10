@@ -2,12 +2,15 @@ import { Router } from 'express';
 import * as itemsController from './controllers/items.js';
 import * as listsController from './controllers/lists.js';
 import * as listItemsController from './controllers/listItems.js';
+import * as unitsController from './controllers/units.js';
 
 const router = Router();
 
 const itemRouter = Router();
 const listRouter = Router();
 const listItemRouter = Router({ mergeParams: true });
+const unitRouter = Router();
+
 listRouter.use('/list/:listId/listItems', listItemRouter);
 // const { Products } = require('./controllers/productsController');
 // const { Lists } = require('./controllers/listsConstroller');
@@ -22,19 +25,27 @@ router.get('/', async (req, res) => {
 });
 
 itemRouter.get('/items', itemsController.getAll);
-itemRouter.get('/item/:id', itemsController.getItem);
-itemRouter.post('/item', itemsController.addItem);
-itemRouter.put('/item/:id', itemsController.updateItem);
+itemRouter.get('/items/:id', itemsController.getItem);
+itemRouter.post('/items', itemsController.addItem);
+itemRouter.put('/items/:id', itemsController.updateItem);
 
-listRouter.get('/list/:listId', listsController.getList);
-listRouter.post('/list', listsController.addList);
+listRouter.get('/lists/:listId', listsController.getList);
+listRouter.get('/lists\\(:name\\)', listsController.getListByName);
+listRouter.get('/lists', listsController.getAllLists);
+listRouter.post('/lists', listsController.addList);
 
 listItemRouter.get('/', listItemsController.getAllListItems);
 listItemRouter.get('/:id', listItemsController.getListItem);
 listItemRouter.post('/', listItemsController.addListItem);
 
+unitRouter.get('/units', unitsController.getAll);
+unitRouter.get('/units/:id', unitsController.getUnit);
+unitRouter.post('/units', unitsController.addUnit);
+unitRouter.put('/units/:id', unitsController.updateUnit);
+
 router.use(itemRouter);
 router.use(listRouter);
+router.use(unitRouter);
 // router.get('/random-name', randomNameController.get);
 
 // router.get('/products', productsController.list);

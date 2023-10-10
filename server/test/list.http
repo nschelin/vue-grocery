@@ -2,17 +2,25 @@
 @hostname = http://{{host}}:{{port}}
 
 ### Examples
-@listName = "my-new-list"
+@listName = "my list"
 @updListName = "my-updated-list"
+
+@queryListName = my list
+
+
 ### Insert List
 # @name newList
-POST {{hostname}}/api/list HTTP/1.1
+POST {{hostname}}/api/lists HTTP/1.1
 Content-Type: application/json
 
 {
 	"name": {{listName}}
 }
 
-### Get List
-GET {{hostname}}/api/list/1 HTTP/1.1
+### Get List By Id
+GET {{hostname}}/api/lists/1 HTTP/1.1
+Accept: application/json
+
+### Get List by Name
+GET {{hostname}}/api/lists({{queryListName}}) HTTP/1.1
 Accept: application/json

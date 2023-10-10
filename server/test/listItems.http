@@ -3,10 +3,23 @@
 
 ### Examples
 
+@listId = 1
+
 ### Get ListItem
-GET {{hostname}}/api/list/1/listItems/2 HTTP/1.1
+GET {{hostname}}/api/list/{{listId}}/listItems/2 HTTP/1.1
 Accept: application/json
 
 ### Get All
 GET {{hostname}}/api/list/1/listItems HTTP/1.1
 Accept: application/json
+
+### Add List Item
+
+POST {{hostname}}/api/list/{{listId}}/listItems
+Content-Type: application/json
+
+{
+	"name": "Grape",
+	"price": 2.00,
+	"unit": "lbs"
+}

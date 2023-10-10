@@ -20,6 +20,10 @@ const ListItem = db.define(
 			type: DataTypes.DECIMAL(10, 2),
 			defaultValue: 0.0,
 		},
+		unit: {
+			type: DataTypes.STRING,
+			defaultValue: 'item',
+		},
 	},
 	{
 		paranoid: true,
