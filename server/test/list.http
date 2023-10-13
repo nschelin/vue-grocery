@@ -17,10 +17,22 @@ Content-Type: application/json
 	"name": {{listName}}
 }
 
+### Update List
+PUT {{hostname}}/api/lists/1
+Content-Type: application/json
+
+{
+	"name": {{updListName}}
+}
+
 ### Get List By Id
 GET {{hostname}}/api/lists/1 HTTP/1.1
 Accept: application/json
 
 ### Get List by Name
 GET {{hostname}}/api/lists({{queryListName}}) HTTP/1.1
+Accept: application/json
+
+### Get List by Name with items
+GET {{hostname}}/api/lists({{queryListName}})?items HTTP/1.1
 Accept: application/json

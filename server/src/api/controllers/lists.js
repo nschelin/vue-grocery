@@ -40,8 +40,26 @@ async function add({ name }) {
 	return await List.create({ name });
 }
 
+async function update(id, { name }) {
+	const list = await List.findByPk(id, {
+		attributes: { exclude: ['deleted'] },
+	});
+
+	if (list) {
+		list.name = name;
+		await list.save();
+	} else {
+		throw new Error(`list id: ${id}`);
+	}
+
+	return list;
+}
+
 async function getList(req, res) {
-	const { listId, includeItems } = req.params;
+	const { listId } = req.params;
+	const { items } = req.query;
+	const includeItems = items !== undefined; // * exists
+
 	try {
 		const list = await get(listId, includeItems);
 		res.status(200).json({ message: 'List Retrieved', list });
@@ -67,9 +85,12 @@ async function getAllLists(req, res) {
 
 async function getListByName(req, res) {
 	const { name } = req.params;
+	const { items } = req.query;
+	const includeItems = items !== undefined; // * exists
+
 	try {
 		let message = 'List Retrieved';
-		const list = await getByName(name);
+		const list = await getByName(name, includeItems);
 		if (!list) {
 			message = 'No List';
 		}
@@ -96,4 +117,19 @@ async function addList(req, res) {
 	}
 }
 
-export { addList, getList, getListByName, getAllLists };
+async function updateList(req, res) {
+	const { id } = req.params;
+	const { name } = req.body;
+
+	try {
+		const list = await update(id, { name });
+		res.status(200).json({ message: 'List Updated', list });
+	} catch (e) {
+		console.log(e);
+		res.status(500).json({
+			message: 'Internal Server Error',
+		});
+	}
+}
+
+export { addList, getList, getListByName, updateList, getAllLists };

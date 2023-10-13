@@ -33,6 +33,7 @@ listRouter.get('/lists/:listId', listsController.getList);
 listRouter.get('/lists\\(:name\\)', listsController.getListByName);
 listRouter.get('/lists', listsController.getAllLists);
 listRouter.post('/lists', listsController.addList);
+listRouter.put('/lists/:id', listsController.updateList);
 
 listItemRouter.get('/', listItemsController.getAllListItems);
 listItemRouter.get('/:id', listItemsController.getListItem);
